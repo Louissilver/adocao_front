@@ -11,8 +11,6 @@
 <!--ts-->
    * [Instalação](#instalação)
    * [Dependências](#dependências)
-   * [Variáveis de ambiente](#variáveis-de-ambiente)
-   * [Banco de dados](#banco-de-dados)
    * [Execução](#execução)
 <!--te-->
 
