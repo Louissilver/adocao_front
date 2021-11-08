@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../../../controller/associado/pets/pet.html">
+  <link rel="stylesheet" href="../../../assets/css/base/base.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -32,7 +32,7 @@
               <a class="nav-link" href="../solicitacoes.html">Minhas solicitações</a>
             </li>
             <li class="nav-item px-3">
-              <a class="nav-link" href="../../../index.html"><small>Sair</small></a>
+              <a class="nav-link" href="../../../index.html" onclick="sessionStorage.clear()"><small>Sair</small></a>
             </li>
           </ul>
         </div>
@@ -42,8 +42,8 @@
 
   <main class="container-fluid" data-main-pet>
     <section class="my-4">
-      <h1 class="h4 py-1">Pet {nome do pet}</h1>
-      <h2 class="h6 text-muted">ONG: {nome da ong}</footer>
+      <h1 class="h4 py-1">Informações do pet</h1>
+      <h2 class="h6 text-muted" data-nome-ong></h2>
     </section>
   </main>
 

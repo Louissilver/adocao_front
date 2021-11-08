@@ -1,32 +1,31 @@
-const listaPets = () => {
-  return fetch(`http://localhost:8000/pets`)
+const listarOngs = () => {
+  return fetch(`http://localhost:8000/ongs`)
     .then(resposta => {
       if (resposta.ok) {
         return resposta.json()
       }
-      throw new Error('Não foi possível listar os pets')
+      throw new Error('Não foi possível listar as ONGs')
     })
     .then(json => {
       return json
     })
 }
 
-const detalhaPets = (id) => {
-  return fetch(`http://localhost:8000/pets/${id}`)
+const detalharOngs = (id) => {
+  return fetch(`http://localhost:8000/ongs/${id}`)
     .then(resposta => {
       if (resposta.ok) {
         return resposta.json()
       }
-      throw new Error('Não foi possível listar os pets')
+      throw new Error('Não foi possível listar a ONGs')
     })
     .then(json => {
       return json
     })
 }
 
-listaPets()
 
-export const petService = {
-  listaPets,
-  detalhaPets
+export const ongService = {
+  listarOngs,
+  detalharOngs
 }

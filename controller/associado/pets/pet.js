@@ -1,6 +1,7 @@
+import { ongService } from '../../../service/ong_service.js';
 import { petService } from '../../../service/pet_service.js'
 
-const criarTelaPet = (elemento) => {
+const criarElemento = (elemento) => {
 
   var data = new Date(elemento.dataNascimento)
   var ano_atual = new Date().getFullYear();
@@ -22,7 +23,7 @@ const criarTelaPet = (elemento) => {
     idade_meses_string = ` ${idade_meses} mês`
   }
 
-  const linhaNovoCliente = document.createElement('section')
+  const section = document.createElement('section')
   const conteudo = `
     <div class="modal-header">
     <div>
@@ -50,33 +51,15 @@ const criarTelaPet = (elemento) => {
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" onclick="window.history.back()">Voltar</button>
-    <button type="button" class="btn btn-primary" onclick="location.href='../associado/solicitacao_adocao.html?id_pet=${elemento.id}&id_ong=${elemento.id_ong}';">Solicitar adoção</button>
+    <button type="button" class="btn btn-primary" onclick="location.href='../solicitacoes/cadastro.html?id_pet=${elemento.id}';">Solicitar adoção</button>
   </div>
                   `
-  linhaNovoCliente.innerHTML = conteudo
-  return linhaNovoCliente
+  section.innerHTML = conteudo
+  return section
 }
 
-
-const section = document.querySelector('[data-main-pet]')
-/* 
-tabela.addEventListener('click', async (evento) => {
-    let ehBotaoDeDeleta = evento.target.className === 'botao-simples botao-simples--excluir'
-    if (ehBotaoDeDeleta) {
-        try {
-            const linhaPet = evento.target.closest('[data-id]')
-            let id = linhaPet.dataset.id
-            await petService.removePet(id)
-            linhaPet.remove()
-        }
-        catch (erro) {
-            console.log(erro)
-            window.location.href = "../telas/erro.html"
-        }
-    }
-})
-*/
-
+const section = document.querySelector('[data-main-pet]');
+const title = document.querySelector('[data-nome-ong]');
 
 const render = async () => {
 
@@ -85,9 +68,11 @@ const render = async () => {
   const id = pegaURL.searchParams.get('id')
 
   const pet = await petService.detalhaPets(id)
-  section.appendChild(criarTelaPet(pet))
+  section.appendChild(criarElemento(pet))
 
-
+  console.log(pet.id_ong)
+  const ong = await ongService.detalharOngs(pet.id_ong)
+  title.textContent = `ONG: ${ong.nome}`
 }
 
 render()

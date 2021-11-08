@@ -33,7 +33,7 @@
               <a class="nav-link" href="./solicitacoes.html">Minhas solicitações</a>
             </li>
             <li class="nav-item px-3">
-              <a class="nav-link" href="../../index.html"><small>Sair</small></a>
+              <a class="nav-link" href="../../index.html" onclick="sessionStorage.clear()"><small>Sair</small></a>
             </li>
           </ul>
         </div>
@@ -44,8 +44,9 @@
   <main class="container-fluid mb-5">
     <section class="my-4">
       <h1 class="h4 py-1">Pets</h1>
-      <h2 class="h6 text-muted">ONG: Anjos de Rua</footer>
+      <h2 class="h6 text-muted">ONG: Anjos de Rua</h2>
     </section>
+    <button type="button" class="btn btn-secondary my-4" onclick="window.history.back()">Voltar</button>
     <section class="row row-cols-1 row-cols-md-5 g-4" data-lista-pet>
     </section>
   </main>

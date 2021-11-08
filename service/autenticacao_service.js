@@ -1,32 +1,26 @@
-const listaPets = () => {
-  return fetch(`http://localhost:8000/pets`)
+const autenticarUsuario = (usuario, senha) => {
+  return fetch(`http://localhost:8000/token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      login: usuario,
+      senha: senha
+    })
+  })
     .then(resposta => {
       if (resposta.ok) {
         return resposta.json()
       }
-      throw new Error('Não foi possível listar os pets')
+      throw new Error('Não foi possível realizar a autenticação')
     })
     .then(json => {
       return json
     })
 }
 
-const detalhaPets = (id) => {
-  return fetch(`http://localhost:8000/pets/${id}`)
-    .then(resposta => {
-      if (resposta.ok) {
-        return resposta.json()
-      }
-      throw new Error('Não foi possível listar os pets')
-    })
-    .then(json => {
-      return json
-    })
-}
 
-listaPets()
-
-export const petService = {
-  listaPets,
-  detalhaPets
+export const autenticacaoService = {
+  autenticarUsuario,
 }

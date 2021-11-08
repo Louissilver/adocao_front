@@ -32,7 +32,7 @@
               <a class="nav-link" href="../solicitacoes.html">Minhas solicitações</a>
             </li>
             <li class="nav-item px-3">
-              <a class="nav-link" href="../../../index.html"><small>Sair</small></a>
+              <a class="nav-link" href="../../../index.html" onclick="sessionStorage.clear()"><small>Sair</small></a>
             </li>
           </ul>
         </div>
@@ -42,8 +42,83 @@
 
   <main class="container-fluid" data-main-pet>
     <section class="my-4">
-      <h1 class="h4 py-1">Dados pessoais</h1>
+      <h1 class="h4 py-1">Atualização de dados pessoais</h1>
+      <p class="text-muted">Os campos com * são obrigatórios</p>
     </section>
+
+    <form class="container-sm">
+
+      <div class="row">
+        <div class="row">
+          <p class="text-muted my-3">Dados pessoais</p>
+          <hr />
+          <div class="col">
+            <div class="col-md my-3">
+              <label class="form-label" for="nome">* Nome:</label>
+              <input type="text" class="form-control-sm form-control" id="nome" placeholder="Nome completo">
+            </div>
+            <div class="col-md my-3">
+              <label class="form-label" for="cpf">* CPF:</label>
+              <input type="text" class="form-control-sm form-control" id="cpf" placeholder="999.999.999-99">
+            </div>
+            <div class="col-md my-3">
+              <label class="form-label" for="dataNascimento">* Data de nascimento:</label>
+              <input type="date" class="form-control-sm form-control" id="dataNascimento" placeholder="1234">
+            </div>
+          </div>
+          <div class="col">
+            <div class="col-md my-3">
+              <label class="form-label" for="email">* E-mail:</label>
+              <input type="email" class="form-control-sm form-control" id="email" placeholder="name@example.com">
+            </div>
+            <div class="col-md my-3">
+              <label class="form-label" for="telefone">* Telefone:</label>
+              <input type="tel" class="form-control-sm form-control" id="telefone" placeholder="(99)9999-9999">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <p class="text-muted my-3">Dados de endereço</p>
+          <hr />
+          <div class="col">
+            <div class="col-md my-3">
+              <label class="form-label" for="cep">* CEP:</label>
+              <input pattern="[\d]{5}-?[\d]{3}" type="text" class="form-control-sm form-control" id="cep"
+                placeholder="99999-999" required>
+            </div>
+            <div class="col-md my-3">
+              <label class="form-label" for="logradouro">* Logradouro:</label>
+              <input type="text" class="form-control-sm form-control" id="logradouro" placeholder="Rua das Palmeiras"
+                readonly data-tipo-logradouro>
+            </div>
+            <div class="col-md my-3">
+              <label class="form-label" for="numero">* Número:</label>
+              <input type="number" class="form-control-sm form-control" id="numero" placeholder="1234">
+            </div>
+          </div>
+          <div class="col">
+            <div class="col-md my-3">
+              <label class="form-label" for="bairro">* Bairro:</label>
+              <input type="text" class="form-control-sm form-control" id="bairro" placeholder="Floresta" required
+                readonly>
+            </div>
+            <div class="col-md my-3">
+              <label class="form-label" for="estado">* Estado:</label>
+              <input type="text" class="form-control-sm form-control" id="estado" placeholder="SP" readonly
+                data-tipo-estado>
+            </div>
+            <div class="col-md my-3">
+              <label class="form-label" for="cidade">* Cidade:</label>
+              <input type="text" class="form-control-sm form-control" id="cidade" placeholder="São Paulo" readonly
+                data-tipo-cidade>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary my-3">Atualizar</button>
+      <button type="button" class="btn btn-secondary my-4" onclick="window.history.back()">Voltar</button>
+    </form>
   </main>
 
   <footer class="d-flex justify-content-center">
@@ -56,7 +131,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
-  <script type="module" src="../../../controller/associado/dados/atualizacao.html"></script>
+  <script type="module" src="../../../controller/associado/dados/atualizacao.js"></script>
 </body>
 
 </html>

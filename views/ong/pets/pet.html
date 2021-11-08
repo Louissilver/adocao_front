@@ -32,7 +32,7 @@
               <a class="nav-link" href="../solicitacoes.html">Minhas solicitações</a>
             </li>
             <li class="nav-item px-3">
-              <a class="nav-link" href="../../../index.html"><small>Sair</small></a>
+              <a class="nav-link" href="../../../index.html" onclick="sessionStorage.clear()"><small>Sair</small></a>
             </li>
           </ul>
         </div>
@@ -42,8 +42,7 @@
 
   <main class="container-fluid" data-main-pet>
     <section class="my-4">
-      <h1 class="h4 py-1">Pet {nome do pet}</h1>
-      <h2 class="h6 text-muted">ONG: {nome da ong}</footer>
+      <h1 class="h4 py-1">Informações do pet</h1>
     </section>
   </main>
 
@@ -56,7 +55,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
-  <script type="module" src="../../../controller/ong/pets/pet.html"></script>
+  <script type="module" src="../../../controller/ong/pets/pet.js"></script>
 </body>
 
 </html>

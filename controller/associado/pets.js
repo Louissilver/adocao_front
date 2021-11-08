@@ -1,6 +1,6 @@
 import { petService } from '../../service/pet_service.js'
 
-const criarCardPet = (elemento) => {
+const criarElemento = (elemento) => {
 
     var data = new Date(elemento.dataNascimento)
     var ano_atual = new Date().getFullYear();
@@ -22,7 +22,7 @@ const criarCardPet = (elemento) => {
         idade_meses_string = ` ${idade_meses} mês`
     }
 
-    const linhaNovoCliente = document.createElement('div')
+    const div = document.createElement('div')
     const conteudo = `
             <article class="col" id=${elemento.id}>
                 <div class="card">
@@ -37,25 +37,31 @@ const criarCardPet = (elemento) => {
                         <li class="list-group-item">Idade: ${idade_anos_string}${idade_meses_string}</li>
                     </ul>
                     <div class="card-body">
-                        <a href="../associado/pet.html?id=${elemento.id}" class="card-link">Ver mais</a>
+                        <a href="../associado/pets/pet.html?id=${elemento.id}" class="card-link">Ver mais</a>
                     </div>
                 </div>
             </article>
                   `
-    linhaNovoCliente.innerHTML = conteudo
-    return linhaNovoCliente
+    div.innerHTML = conteudo
+    return div
 }
 
 const section = document.querySelector('[data-lista-pet]')
-
 const render = async () => {
+    const pegaURL = new URL(window.location)
+    const id = pegaURL.searchParams.get('id')
 
-    const listaPets = await petService.listaPets()
-    listaPets.forEach(elemento => {
-        section.appendChild(criarCardPet(elemento))
+    const pets = await petService.listarPets();
+
+    const petsFiltrados = pets.filter((pet) => {
+        if (pet.id_ong == id && pet.adotado == false) {
+            return pet
+        }
     })
 
-
+    petsFiltrados.forEach(elemento => {
+        section.appendChild(criarElemento(elemento));
+    });
 }
 
-render()
+render();

@@ -27,8 +27,6 @@ const criarElemento = (elemento) => {
   <li class="list-group-item">Data da solicitação: ${new Date(elemento.dataSolicitacao).toLocaleDateString()}</li>
   </ul>
   <div class="modal-footer">
-  <button ${elemento.aprovado ? "disabled" : "enabled"} id="aprovar" type="button" class="btn btn-primary">Aprovar</button>
-  <button ${elemento.finalizado ? "disabled" : "enabled"} id="finalizar" type="button" class="btn btn-primary">Finalizar</button>
   <button type="button" class="btn btn-secondary" onclick="window.history.back()">Voltar</button>
   </div>
   </div>

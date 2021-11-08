@@ -32,7 +32,7 @@
               <a class="nav-link" href="./solicitacoes.html">Minhas solicitações</a>
             </li>
             <li class="nav-item px-3">
-              <a class="nav-link" href="../../index.html"><small>Sair</small></a>
+              <a class="nav-link" href="../../index.html" onclick="sessionStorage.clear()"><small>Sair</small></a>
             </li>
           </ul>
         </div>
@@ -40,10 +40,21 @@
     </div>
   </header>
 
-  <main class="container-fluid" data-main-pet>
+  <main class="container-fluid my-3" data-main-pet>
     <section class="my-4">
       <h1 class="h4 py-1">Página inicial</h1>
-      <h2 class="h6 text-muted">Seja bem vindo(a) {nome da pessoa}</footer>
+      <h2 class="h6 text-muted" data-nome>Seja bem vindo(a) {nome da pessoa}</footer>
+    </section>
+    <section class="col">
+      <div class="d-grid gap-2 d-md-block">
+        <button class="btn btn-secondary btn-lg" onclick="window.location.href='./dados/pessoa.html'">Editar dados
+          cadastrais</button>
+        <button class="btn btn-secondary btn-lg" onclick="window.location.href='./dados/usuario.html'">Editar dados de
+          usuário</button>
+      </div>
+    </section>
+    <h2 class="h6 text-muted my-3">Meus pets</h2>
+    <section class="row row-cols-1 row-cols-md-5 g-4" data-lista-pets>
     </section>
   </main>
 
@@ -56,7 +67,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
-  <script type="module" src="../../controller/associado/home.html"></script>
+  <script type="module" src="../../controller/associado/home.js"></script>
 </body>
 
 </html>
