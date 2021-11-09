@@ -50,6 +50,7 @@ const criarElemento = (elemento) => {
     </ul>
   </div>
   <div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="window.location.href='./edicao.html?id=${elemento.id}'">Editar dados</button>
     <button type="button" class="btn btn-secondary" onclick="window.history.back()">Voltar</button>
   </div>
                   `
@@ -69,7 +70,6 @@ const render = async () => {
   section.appendChild(criarElemento(pet))
 
   console.log(pet.id_ong)
-  const ong = await ongService.detalharOngs(pet.id_ong)
 }
 
 render()
