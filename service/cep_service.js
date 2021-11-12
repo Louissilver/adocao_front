@@ -1,4 +1,6 @@
-function recuperarCEP(input) {
+import { preencherCamposComCEP } from '../controller/cadastro/associado.js'
+
+export function recuperarCEP(input) {
   const cep = input.value.replace(/\D/g, '')
   const url = `https://viacep.com.br/ws/${cep}/json/`
   const options = {
@@ -9,18 +11,21 @@ function recuperarCEP(input) {
     }
   }
 
-  return fetch(url, options)
-    .then(resposta => {
-      if (resposta.ok) {
-        return resposta.json()
+  if (!input.validity.patternMismatch && !input.validity.valueMissing) {
+    fetch(url, options).then(
+      response => response.json()
+    ).then(
+      data => {
+        if (data.erro) {
+          input.setCustomValidity('Não foi possível buscar o CEP.')
+          return
+        }
+        input.setCustomValidity('')
+        preencherCamposComCEP(data)
+        return
       }
-      throw new Error('Não foi possível listar os pets')
-    })
-    .then(json => {
-      return json
-    }
     )
-
+  }
 }
 
-export default recuperarCEP;
+

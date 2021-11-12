@@ -1,37 +1,71 @@
-import recuperarCEP from "../../service/cep_service.js";
-
-const preencheCamposComCEP = (data) => {
-  const logradouro = document.getElementById('logradouro');
-  const cidade = document.getElementById('cidade');
-  const estado = document.getElementById('estado');
-  const bairro = document.getElementById('bairro');
-
-  logradouro.value = data.logradouro;
-  cidade.value = data.localidade;
-  estado.value = data.uf;
-  bairro.value = data.bairro;
-}
+import { ongService } from "../../service/ong_service.js";
+import { validarCamposDeOng } from "../../validations/ong.js";
 
 
-const render = async (input) => {
-  const data = await recuperarCEP(input);
-  preencheCamposComCEP(data);
-}
+const nome = document.getElementById('nome')
+const email = document.getElementById('email')
+const cnpj = document.getElementById('cnpj')
+const telefone = document.getElementById('telefone')
+const cep = document.getElementById('cep')
+const logradouro = document.getElementById('logradouro');
+const cidade = document.getElementById('cidade');
+const estado = document.getElementById('estado');
+const bairro = document.getElementById('bairro');
+const numero = document.getElementById('numero');
+const usuario = document.getElementById('usuario')
+const senha = document.getElementById('senha')
+const olho = document.getElementById('olho')
+const formulario = document.querySelector('[data-form]')
+const inputs = document.querySelectorAll('input')
 
-const cep = document.querySelector('#cep')
+formulario.addEventListener('submit', async (evento) => {
+  evento.preventDefault()
+  try {
+    const dados = {
+      nome: nome.value,
+      email: email.value,
+      cnpj: cnpj.value,
+      telefone: telefone.value,
+      cep: cep.value,
+      logradouro: logradouro.value,
+      cidade: cidade.value,
+      estado: estado.value,
+      bairro: bairro.value,
+      numero: numero.value,
+      login: usuario.value,
+      senha: senha.value,
+    }
 
-cep.addEventListener('blur', (evento) => {
-  render(evento.target)
+    await ongService.cadastrarONG(dados)
+    window.alert("ONG cadastrado com sucesso!")
+  }
+  catch (erro) {
+    console.log(erro)
+    window.alert("Erro ao cadastrar ONG!")
+  }
 })
 
-document.getElementById('olho').addEventListener('mousedown', function () {
-  document.getElementById('senha').type = 'text';
+export const preencherCamposComCEP = (dados) => {
+  logradouro.value = dados.logradouro;
+  cidade.value = dados.localidade;
+  estado.value = dados.uf;
+  bairro.value = dados.bairro;
+}
+
+olho.addEventListener('mousedown', function () {
+  senha.type = 'text';
 });
 
-document.getElementById('olho').addEventListener('mouseup', function () {
-  document.getElementById('senha').type = 'password';
+olho.addEventListener('mouseup', function () {
+  senha.type = 'password';
 });
 
-document.getElementById('olho').addEventListener('mousemove', function () {
-  document.getElementById('senha').type = 'password';
+olho.addEventListener('mousemove', function () {
+  senha.type = 'password';
 });
+
+inputs.forEach(input => {
+  input.addEventListener('blur', (evento) => {
+    validarCamposDeOng(evento.target)
+  })
+})
