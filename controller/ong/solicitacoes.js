@@ -1,6 +1,4 @@
 import { solicitacao_adocaoService } from '../../service/solicitacao_adocao_service.js'
-import { usuarioService } from '../../service/usuario_service.js'
-import { ongService } from '../../service/ong_service.js'
 
 const criarCardSolicitacao = (elemento) => {
 
@@ -30,15 +28,11 @@ const criarCardSolicitacao = (elemento) => {
 
 const section = document.querySelector('[data-lista-solicitacoes]')
 
-const render = async () => {
-  const token = sessionStorage.getItem('token');
-
-  const usuarioAtual = await usuarioService.retornarUsuarioAtual(token)
-
-  const ong = await ongService.detalharOngs(usuarioAtual.id_tipo_pessoa)
+const listarSolicitacoes = async () => {
+  const id_ong = sessionStorage.getItem('id_tipo_pessoa')
   const solicitacoes = await solicitacao_adocaoService.listarSolicitacoes()
   const solicitacoesFiltradas = solicitacoes.filter(solicitacao => {
-    if (solicitacao.id_ong == ong.id) {
+    if (solicitacao.id_ong == id_ong) {
       return solicitacao
     }
   })
@@ -48,4 +42,4 @@ const render = async () => {
   })
 }
 
-render()
+listarSolicitacoes()

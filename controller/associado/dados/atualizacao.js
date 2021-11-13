@@ -1,25 +1,49 @@
-import recuperarCEP from "../../../service/cep_service.js";
+import { validarCamposDeAssociado } from "../../../validations/associado.js";
 import { associadoService } from '../../../service/associado_service.js'
-import { usuarioService } from '../../../service/usuario_service.js'
 
+const cep = document.getElementById('cep')
+const nome = document.getElementById('nome');
+const email = document.getElementById('email');
+const telefone = document.getElementById('telefone');
+const logradouro = document.getElementById('logradouro');
+const bairro = document.getElementById('bairro');
+const numero = document.getElementById('numero');
+const cidade = document.getElementById('cidade');
+const estado = document.getElementById('estado');
+const cpf = document.getElementById('cpf');
+const dataNascimento = document.getElementById('dataNascimento');
+const formulario = document.querySelector('[data-form]')
+const inputs = document.querySelectorAll('input')
 
-const render = async () => {
-  const token = sessionStorage.getItem('token');
-  const usuarioAtual = await usuarioService.retornarUsuarioAtual(token)
-  const associado = await associadoService.detalharAssociado(usuarioAtual.id_tipo_pessoa)
+formulario.addEventListener('submit', async (evento) => {
+  evento.preventDefault()
+  try {
+    const dados = {
+      nome: nome.value,
+      email: email.value,
+      cpf: cpf.value,
+      telefone: telefone.value,
+      dataNascimento: new Date(dataNascimento.value).toLocaleDateString(),
+      cep: cep.value,
+      logradouro: logradouro.value,
+      cidade: cidade.value,
+      estado: estado.value,
+      bairro: bairro.value,
+      numero: numero.value,
+    }
 
+    await associadoService.atualizarAssociado(dados)
+    window.alert("Associado cadastrado com sucesso!")
+  }
+  catch (erro) {
+    console.log(erro)
+    window.alert("Erro ao cadastrar associado!")
+  }
+})
 
-  const nome = document.getElementById('nome');
-  const email = document.getElementById('email');
-  const telefone = document.getElementById('telefone');
-  const cep = document.getElementById('cep');
-  const logradouro = document.getElementById('logradouro');
-  const bairro = document.getElementById('bairro');
-  const numero = document.getElementById('numero');
-  const cidade = document.getElementById('cidade');
-  const estado = document.getElementById('estado');
-  const cpf = document.getElementById('cpf');
-  const dataNascimento = document.getElementById('dataNascimento');
+const detalharCampos = async () => {
+  const id_associado = sessionStorage.getItem('id_tipo_pessoa')
+  const associado = await associadoService.detalharAssociado(id_associado)
 
   nome.value = associado.nome
   email.value = associado.email
@@ -32,33 +56,12 @@ const render = async () => {
   estado.value = associado.endereco.estado
   cpf.value = associado.cpf
   dataNascimento.value = new Date(associado.dataNascimento).toISOString().split('T')[0]
-
 }
 
-render();
-
-
-
-const preencheCamposComCEP = (data) => {
-  const logradouro = document.getElementById('logradouro');
-  const cidade = document.getElementById('cidade');
-  const estado = document.getElementById('estado');
-  const bairro = document.getElementById('bairro');
-
-  logradouro.value = data.logradouro;
-  cidade.value = data.localidade;
-  estado.value = data.uf;
-  bairro.value = data.bairro;
-}
-
-
-const renderCep = async (input) => {
-  const data = await recuperarCEP(input);
-  preencheCamposComCEP(data);
-}
-
-const cep = document.querySelector('#cep')
-
-cep.addEventListener('blur', (evento) => {
-  renderCep(evento.target)
+inputs.forEach(input => {
+  input.addEventListener('blur', (evento) => {
+    validarCamposDeAssociado(evento.target)
+  })
 })
+
+detalharCampos();

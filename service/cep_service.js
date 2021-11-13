@@ -1,5 +1,3 @@
-import { preencherCamposComCEP } from '../controller/cadastro/associado.js'
-
 export function recuperarCEP(input) {
   const cep = input.value.replace(/\D/g, '')
   const url = `https://viacep.com.br/ws/${cep}/json/`
@@ -21,11 +19,22 @@ export function recuperarCEP(input) {
           return
         }
         input.setCustomValidity('')
-        preencherCamposComCEP(data)
+        preencheCamposComCEP(data)
         return
       }
     )
   }
 }
 
+const preencheCamposComCEP = (data) => {
+  const logradouro = document.getElementById('logradouro');
+  const bairro = document.getElementById('bairro');
+  const estado = document.getElementById('estado');
+  const cidade = document.getElementById('cidade');
+
+  logradouro.value = data.logradouro;
+  cidade.value = data.localidade;
+  estado.value = data.uf;
+  bairro.value = data.bairro;
+}
 

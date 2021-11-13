@@ -1,24 +1,52 @@
 import { usuarioService } from '../../../service/usuario_service.js'
+import { validarCamposDeAssociado } from "../../../validations/associado.js";
 
-document.getElementById('olho').addEventListener('mousedown', function () {
-  document.getElementById('senha').type = 'text';
-});
+const usuario = document.getElementById('usuario')
+const olho = document.getElementById('olho')
+const senha = document.getElementById('senha')
+const formulario = document.querySelector('[data-form]')
+const inputs = document.querySelectorAll('input')
 
-document.getElementById('olho').addEventListener('mouseup', function () {
-  document.getElementById('senha').type = 'password';
-});
+formulario.addEventListener('submit', async (evento) => {
+  evento.preventDefault()
+  try {
+    const dados = {
+      login: usuario.value,
+      senha: senha.value,
+    }
 
-document.getElementById('olho').addEventListener('mousemove', function () {
-  document.getElementById('senha').type = 'password';
-});
+    await usuarioService.atualizarUsuario(dados)
+    window.alert("Associado cadastrado com sucesso!")
+  }
+  catch (erro) {
+    console.log(erro)
+    window.alert("Erro ao cadastrar associado!")
+  }
+})
 
-const render = async () => {
+const detalharCampos = async () => {
   const token = sessionStorage.getItem('token');
   const usuarioAtual = await usuarioService.retornarUsuarioAtual(token)
-
-  const usuario = document.getElementById('usuario');
 
   usuario.value = usuarioAtual.usuario_atual
 }
 
-render();
+olho.addEventListener('mousedown', function () {
+  senha.type = 'text';
+});
+
+olho.addEventListener('mouseup', function () {
+  senha.type = 'password';
+});
+
+olho.addEventListener('mousemove', function () {
+  senha.type = 'password';
+});
+
+inputs.forEach(input => {
+  input.addEventListener('blur', (evento) => {
+    validarCamposDeAssociado(evento.target)
+  })
+})
+
+detalharCampos();

@@ -45,7 +45,7 @@
       <h1 class="h4 py-1">Edição de dados do pet</h1>
     </section>
 
-    <form class="container-sm">
+    <form class="container-sm" data-form>
 
       <div class="row">
         <div class="row">
@@ -53,12 +53,16 @@
           <div class="col">
             <div class="col-md my-3">
               <label class="form-label" for="nome">* Nome:</label>
-              <input type="text" class="form-control-sm form-control" id="nome" placeholder="Nome do pet">
+              <input type="text" class="form-control-sm form-control" id="nome" placeholder="Nome do pet"
+                data-tipo="nome" required aria-describedby="nomeFeedback">
+              <span class="invalid-feedback" id="nomeFeedback"></span>
             </div>
             <div class="col-md my-3">
               <label class="form-label" for="especie">* Espécie:</label>
               <input type="text" class="form-control-sm form-control" id="especie"
-                placeholder="Espécie do pet, como cachorro, gato...">
+                placeholder="Espécie do pet, como cachorro, gato..." data-tipo="especie" required
+                aria-describedby="especieFeedback">
+              <span class="invalid-feedback" id="especieFeedback"></span>
             </div>
             <div class="col-md my-3">
               <label class="form-label" for="porte">* Porte:</label>
@@ -73,16 +77,23 @@
           <div class="col">
             <div class="col-md my-3">
               <label class="form-label" for="raca">* Raça:</label>
-              <input type="text" class="form-control-sm form-control" id="raca" placeholder="Raça do pet">
+              <input type="text" class="form-control-sm form-control" id="raca" placeholder="Raça do pet"
+                data-tipo="raca" required aria-describedby="racaFeedback">
+              <span class="invalid-feedback" id="racaFeedback"></span>
             </div>
             <div class="col-md my-3">
               <label class="form-label" for="dataNascimento">* Data de nascimento:</label>
-              <input type="date" class="form-control-sm form-control" id="dataNascimento">
+              <input type="date" class="form-control-sm form-control" id="dataNascimento" data-tipo="dataNascimento"
+                required aria-describedby="dataNascimentoFeedback">
+              <span class="invalid-feedback" id="dataNascimentoFeedback"></span>
             </div>
             <div class="col-md my-3">
               <label class="form-label" for="urlFoto">* URL de imagem:</label>
               <input type="text" class="form-control-sm form-control" id="urlFoto"
-                placeholder="https://www.petlove.com.br/images/breeds/193446/profile/original/pinscher-p.jpg?1532539343">
+                pattern="^(http(s)?:\/\/)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$"
+                placeholder="https://www.petlove.com.br/images/breeds/193446/profile/original/pinscher-p.jpg?1532539343"
+                data-tipo="urlFoto" required aria-describedby="urlFotoFeedback">
+              <span class="invalid-feedback" id="urlFotoFeedback"></span>
             </div>
           </div>
         </div>
@@ -109,12 +120,14 @@
             <div class="col-md my-3">
               <label class="form-label" for="observacoes">* Observações:</label>
               <textarea type="text" class="form-control-sm form-control" id="observacoes"
-                placeholder="Digite um texto com informações pertinentes ao pet" required readonly></textarea>
+                placeholder="Digite um texto com informações pertinentes ao pet" data-tipo="observacoes" required
+                aria-describedby="observacoesFeedback"></textarea>
+              <span class="invalid-feedback" id="observacoesFeedback"></span>
             </div>
           </div>
         </div>
       </div>
-      <button type="button" class="btn btn-primary my-3">Atualizar</button>
+      <button type="submit" class="btn btn-primary my-3">Atualizar</button>
       <button type="button" class="btn btn-secondary my-4" onclick="window.history.back()">Voltar</button>
     </form>
   </main>

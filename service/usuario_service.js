@@ -13,6 +13,7 @@ const retornarUsuarioAtual = (token) => {
 
 const listarNomesDeUsuario = (input) => {
   const nomeUsuario = input.value
+  const usuario_atual = sessionStorage.getItem('usuario_atual')
 
   const url = `http://localhost:8000/usuarios/existe/${nomeUsuario}`
   const options = {
@@ -29,7 +30,7 @@ const listarNomesDeUsuario = (input) => {
       .then(resposta => resposta.json()
       )
       .then(data => {
-        if (data == nomeUsuario) {
+        if (data == nomeUsuario && !(data == usuario_atual)) {
           input.setCustomValidity('O nome de usuário já está em uso.')
           return
         }

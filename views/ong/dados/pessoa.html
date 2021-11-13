@@ -46,7 +46,7 @@
       <p class="text-muted">Os campos com * são obrigatórios</p>
     </section>
 
-    <form class="container-sm">
+    <form class="container-sm" data-form>
 
       <div class="row">
         <div class="row">
@@ -55,21 +55,31 @@
           <div class="col">
             <div class="col-md my-3">
               <label class="form-label" for="nome">* Nome:</label>
-              <input type="text" class="form-control-sm form-control" id="nome" placeholder="Nome completo">
+              <input type="text" class="form-control-sm form-control" id="nome" placeholder="Nome completo"
+                data-tipo="nome" required aria-describedby="nomeFeedback">
+              <span class="invalid-feedback" id="nomeFeedback"></span>
+              </span>
             </div>
             <div class="col-md my-3">
-              <label class="form-label" for="cnpj">* CPNJ:</label>
-              <input type="text" class="form-control-sm form-control" id="cnpj" placeholder="99.999.999/0009-99">
+              <label class="form-label" for="cnpj">* CNPJ:</label>
+              <input type="text" class="form-control-sm form-control" id="cnpj" placeholder="999.999.999-99"
+                pattern="[\d]{2}.[\d]{3}.[\d]{3}\/[\d]{4}-[\d]{2}" data-tipo="cnpj" required
+                aria-describedby="cnpjFeedback">
+              <span class="invalid-feedback" id="cnpjFeedback"></span>
             </div>
           </div>
           <div class="col">
             <div class="col-md my-3">
               <label class="form-label" for="email">* E-mail:</label>
-              <input type="email" class="form-control-sm form-control" id="email" placeholder="name@example.com">
+              <input type="email" class="form-control-sm form-control" id="email" placeholder="name@example.com"
+                data-tipo="email" required aria-describedby="emailFeedback">
+              <span class="invalid-feedback" id="emailFeedback"></span>
             </div>
             <div class="col-md my-3">
               <label class="form-label" for="telefone">* Telefone:</label>
-              <input type="tel" class="form-control-sm form-control" id="telefone" placeholder="(99)9999-9999">
+              <input type="tel" class="form-control-sm form-control" id="telefone" placeholder="(99)9999-9999"
+                data-tipo="telefone" required aria-describedby="telefoneFeedback">
+              <span class="invalid-feedback" id="telefoneFeedback"></span>
             </div>
           </div>
         </div>
@@ -80,39 +90,47 @@
           <div class="col">
             <div class="col-md my-3">
               <label class="form-label" for="cep">* CEP:</label>
-              <input pattern="[\d]{5}-?[\d]{3}" type="text" class="form-control-sm form-control" id="cep"
-                placeholder="99999-999" required>
+              <input pattern="[\d]{5}-[\d]{3}" type="text" class="form-control-sm form-control" id="cep"
+                placeholder="99999-999" data-tipo="cep" required aria-describedby="cepFeedback">
+              <span class="invalid-feedback" id="cepFeedback"></span>
+              </span>
             </div>
             <div class="col-md my-3">
               <label class="form-label" for="logradouro">* Logradouro:</label>
               <input type="text" class="form-control-sm form-control" id="logradouro" placeholder="Rua das Palmeiras"
-                readonly data-tipo-logradouro>
+                readonly data-tipo="logradouro" required aria-describedby="logradouroFeedback">
+              <span class="invalid-feedback" id="logradouroFeedback"></span>
             </div>
             <div class="col-md my-3">
               <label class="form-label" for="numero">* Número:</label>
-              <input type="number" class="form-control-sm form-control" id="numero" placeholder="1234">
+              <input type="number" class="form-control-sm form-control" id="numero" placeholder="1234"
+                data-tipo="numero" required min="1" aria-describedby="numeroFeedback">
+              <span class="invalid-feedback" id="numeroFeedback"></span>
             </div>
           </div>
           <div class="col">
             <div class="col-md my-3">
               <label class="form-label" for="bairro">* Bairro:</label>
-              <input type="text" class="form-control-sm form-control" id="bairro" placeholder="Floresta" required
-                readonly>
+              <input type="text" class="form-control-sm form-control" id="bairro" placeholder="Floresta" readonly
+                data-tipo="bairro" required aria-describedby="bairroFeedback">
+              <span class="invalid-feedback" id="bairroFeedback"></span>
             </div>
             <div class="col-md my-3">
               <label class="form-label" for="estado">* Estado:</label>
               <input type="text" class="form-control-sm form-control" id="estado" placeholder="SP" readonly
-                data-tipo-estado>
+                data-tipo="estado" required aria-describedby="estadoFeedback">
+              <span class="invalid-feedback" id="estadoFeedback"></span>
             </div>
             <div class="col-md my-3">
               <label class="form-label" for="cidade">* Cidade:</label>
               <input type="text" class="form-control-sm form-control" id="cidade" placeholder="São Paulo" readonly
-                data-tipo-cidade>
+                data-tipo="cidade" required aria-describedby="cidadeFeedback">
+              <span class="invalid-feedback" id="cidadeFeedback"></span>
             </div>
           </div>
         </div>
       </div>
-      <button type="button" class="btn btn-primary my-3">Atualizar</button>
+      <button type="submit" class="btn btn-primary my-3">Atualizar</button>
       <button type="button" class="btn btn-secondary my-4" onclick="window.history.back()">Voltar</button>
     </form>
   </main>

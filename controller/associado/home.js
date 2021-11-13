@@ -1,6 +1,5 @@
 import { associadoService } from '../../service/associado_service.js';
 import { petService } from '../../service/pet_service.js'
-import { usuarioService } from '../../service/usuario_service.js'
 
 const criarElemento = (elemento) => {
 
@@ -52,16 +51,13 @@ const section = document.querySelector('[data-lista-pets]');
 const h2 = document.querySelector('[data-nome]');
 
 const render = async () => {
-  const token = sessionStorage.getItem('token');
-
-  const usuarioAtual = await usuarioService.retornarUsuarioAtual(token)
-
-  const associado = await associadoService.detalharAssociado(usuarioAtual.id_tipo_pessoa)
+  const id_associado = sessionStorage.getItem('id_tipo_pessoa')
+  const associado = await associadoService.detalharAssociado(id_associado)
 
   const pets = await petService.listarPets();
 
   const petsFiltrados = pets.filter((pet) => {
-    if (pet.id_associado == associado.id && pet.adotado) {
+    if (pet.id_associado == id_associado) {
       return pet
     }
   })

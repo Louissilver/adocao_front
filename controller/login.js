@@ -1,7 +1,5 @@
 import { autenticacaoService } from '../service/autenticacao_service.js'
 import { usuarioService } from '../service/usuario_service.js'
-import { ongService } from '../service/ong_service.js'
-import { associadoService } from '../service/associado_service.js'
 const formulario = document.querySelector('[data-form]')
 
 document.getElementById('olho').addEventListener('mousedown', function () {
@@ -27,15 +25,15 @@ formulario.addEventListener('submit', async (evento) => {
     sessionStorage.setItem('token', token.access_token);
 
     const usuarioAtual = await usuarioService.retornarUsuarioAtual(token.access_token)
+    sessionStorage.setItem('usuario_atual', usuarioAtual.usuario_atual);
     sessionStorage.setItem('tipo_usuario', usuarioAtual.tipo_usuario);
+    sessionStorage.setItem('id_tipo_pessoa', usuarioAtual.id_tipo_pessoa);
 
     if (usuarioAtual.tipo_usuario == "ONG") {
-      const ong = await ongService.detalharOngs(usuarioAtual.id_tipo_pessoa)
-      window.location.href = `./ong/home.html?id=${ong.id}`
+      window.location.href = `./ong/home.html`
     }
     if (usuarioAtual.tipo_usuario == "Associado") {
-      const associado = await associadoService.detalharAssociado(usuarioAtual.id_tipo_pessoa)
-      window.location.href = `./associado/home.html?id=${associado.id}`
+      window.location.href = `./associado/home.html`
     }
   }
   catch (erro) {

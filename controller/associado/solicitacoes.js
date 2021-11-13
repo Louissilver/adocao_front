@@ -31,14 +31,12 @@ const criarCardSolicitacao = (elemento) => {
 const section = document.querySelector('[data-lista-solicitacoes]')
 
 const render = async () => {
-  const token = sessionStorage.getItem('token');
+  const id_associado = sessionStorage.getItem('id_tipo_pessoa')
 
-  const usuarioAtual = await usuarioService.retornarUsuarioAtual(token)
-
-  const associado = await associadoService.detalharAssociado(usuarioAtual.id_tipo_pessoa)
   const solicitacoes = await solicitacao_adocaoService.listarSolicitacoes()
+
   const solicitacoesFiltradas = solicitacoes.filter(solicitacao => {
-    if (solicitacao.id_associado == associado.id) {
+    if (solicitacao.id_associado == id_associado) {
       return solicitacao
     }
   })

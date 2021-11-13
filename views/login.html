@@ -48,23 +48,37 @@
                     <h1 class="h4 py-1">Login</h1>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="usuario" class="form-label">Usuário:</label>
-                        <input type="text" class="form-control" id="usuario">
-                    </div>
-                    <div class="mb-3">
-                        <label for="senha" class="form-label">Senha:</label>
-                        <div class="d-flex align-items-center">
-                            <input type="password" class="form-control form-control mx-2" id="senha">
-                            <svg xmlns="http://www.w3.org/2000/svg" id="olho" width="16" height="16" fill="currentColor"
-                                class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                <path
-                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                            </svg>
+                    <div class="row">
+                        <div class="col-md my-3">
+                            <label class="form-label" for="usuario">* Usuário:</label>
+                            <input type="text" class="form-control" id="usuario" placeholder="Nome de usuário"
+                                data-tipo="usuario" required aria-describedby="usuarioFeedback">
+                            <span class="invalid-feedback" id="usuarioFeedback"></span>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Entrar</button>
+                    <div class="row">
+                        <div class="col-md">
+                            <label class="form-label" for="senha">* Senha:</label>
+                            <input type="password" class="form-control" id="senha" placeholder="Senha123!"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                data-tipo="senha" required aria-describedby="senhaFeedback">
+                            <span class="invalid-feedback" id="senhaFeedback">
+                            </span>
+                            <span>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" id="olho" width="16" height="16"
+                                    fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                    <path
+                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                </svg>
+                                <small>
+                                    Visualizar senha
+                                </small>
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary my-4">Entrar</button>
                 </div>
             </div>
         </form>

@@ -50,17 +50,13 @@ const criarElemento = (elemento) => {
 
 const section = document.querySelector('[data-lista-pet]')
 
-const render = async () => {
-  const token = sessionStorage.getItem('token');
-
-  const usuarioAtual = await usuarioService.retornarUsuarioAtual(token)
-
-  const ong = await ongService.detalharOngs(usuarioAtual.id_tipo_pessoa)
+const listarPets = async () => {
+  const id_ong = sessionStorage.getItem('id_tipo_pessoa')
 
   const pets = await petService.listarPets();
 
   const petsFiltrados = pets.filter((pet) => {
-    if (pet.id_ong == ong.id && !pet.adotado) {
+    if (pet.id_ong == id_ong && !pet.adotado) {
       return pet
     }
   })
@@ -74,4 +70,4 @@ const render = async () => {
   }
 }
 
-render();
+listarPets();
