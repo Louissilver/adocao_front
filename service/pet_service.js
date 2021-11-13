@@ -20,7 +20,6 @@ const detalhaPets = (id) => {
       throw new Error('Não foi possível listar os pets')
     })
     .then(json => {
-      console.log(json)
       return json
     })
 }

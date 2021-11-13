@@ -45,7 +45,7 @@
       <h1 class="h4 py-1">Solicitação de adoção</h1>
     </section>
     <section class="my-4">
-      <form class="container-sm">
+      <form class="container-sm" data-form>
 
         <div class="row">
           <div class="row">
@@ -56,48 +56,46 @@
                 <label class="form-label" for="nomePet">* Nome do pet:</label>
                 <input type="text" class="form-control-sm form-control" id="nomePet" placeholder="Nome do pet" readonly>
               </div>
-
-
             </div>
+          </div>
 
-            <div class="row">
-              <p class="text-muted my-3">Dados da ONG</p>
-              <hr />
+          <div class="row">
+            <p class="text-muted my-3">Dados da ONG</p>
+            <hr />
+            <div class="col-md my-3">
+              <label class="form-label" for="nomeOng">* Nome da ONG:</label>
+              <input type="text" class="form-control-sm form-control" id="nomeOng" placeholder="Nome completo da ONG"
+                readonly>
+            </div>
+            <div class="col-md my-3">
+              <label class="form-label" for="cnpjOng">* CNPJ da ONG:</label>
+              <input type="text" class="form-control-sm form-control" id="cnpjOng" placeholder="99.999.999/0009-99"
+                readonly>
+            </div>
+          </div>
+
+          <div class="row">
+            <p class="text-muted my-3">Dados do associado</p>
+            <hr />
+            <div class="col">
               <div class="row">
                 <div class="col-md my-3">
-                  <label class="form-label" for="nomeOng">* Nome da ONG:</label>
-                  <input type="text" class="form-control-sm form-control" id="nomeOng"
-                    placeholder="Nome completo da ONG" readonly>
+                  <label class="form-label" for="nomeAssociado">* Nome do associado:</label>
+                  <input type="text" class="form-control-sm form-control" id="nomeAssociado"
+                    placeholder="Nome completo do associado" readonly>
                 </div>
                 <div class="col-md my-3">
-                  <label class="form-label" for="cnpjOng">* CNPJ da ONG:</label>
-                  <input type="text" class="form-control-sm form-control" id="cnpjOng" placeholder="99.999.999/0009-99"
+                  <label class="form-label" for="cpf">* CPF do associado:</label>
+                  <input type="text" class="form-control-sm form-control" id="cpf" placeholder="999.999.999-99"
                     readonly>
                 </div>
               </div>
-            </div>
-
-            <div class="row">
-              <p class="text-muted my-3">Dados do associado</p>
-              <hr />
-              <div class="col">
-                <div class="row">
-                  <div class="col-md my-3">
-                    <label class="form-label" for="nomeAssociado">* Nome do associado:</label>
-                    <input type="text" class="form-control-sm form-control" id="nomeAssociado"
-                      placeholder="Nome completo do associado" readonly>
-                  </div>
-                  <div class="col-md my-3">
-                    <label class="form-label" for="cpf">* CPF do associado:</label>
-                    <input type="text" class="form-control-sm form-control" id="cpf" placeholder="999.999.999-99"
-                      readonly>
-                  </div>
-                </div>
-                <div class="col-md my-3">
-                  <label class="form-label" for="referencias">* Referências do associado:</label>
-                  <textarea type="text" class="form-control-sm form-control" id="referencias"
-                    placeholder="Explique em algumas palavras porque você acha que teria condições de adotar esse pet"></textarea>
-                </div>
+              <div class="col-md my-3">
+                <label class="form-label" for="referencias">* Referências do associado:</label>
+                <textarea type="text" class="form-control-sm form-control" id="referencias"
+                  placeholder="Explique em algumas palavras porque você acha que teria condições de adotar esse pet"
+                  data-tipo="referencias" required aria-describedby="referenciasFeedback"></textarea>
+                <span class="invalid-feedback" id="referenciasFeedback"></span>
               </div>
             </div>
           </div>
