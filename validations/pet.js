@@ -25,28 +25,25 @@ const tiposDeErro = [
 
 const mensagensDeErro = {
   nome: {
-    valueMissing: 'O campo de nome não pode estar vazio.',
-    customError: 'O nome deve conter, pelo menos, três caracteres.'
+    valueMissing: "O campo nome é obrigatório.",
+    customError: "O nome deve conter, pelo menos, 2 caracteres."
   },
   especie: {
-    valueMissing: 'O campo de especie não pode estar vazio.',
-    customError: 'A espécie deve conter, pelo menos, 2 caracteres.'
+    valueMissing: "O campo espécie é obrigatório.",
+    customError: "A espécie deve conter, pelo menos, 3 caracteres."
   },
   raca: {
-    valueMissing: 'O campo de raça não pode estar vazio.',
-    customError: 'A raça deve conter, pelo menos, 2 caracteres.'
+    valueMissing: "O campo raça é obrigatório.",
+    customError: "A raça deve conter, pelo menos, 3 caracteres."
   },
   dataNascimento: {
-    valueMissing: 'O campo de data de nascimento não pode estar vazio.',
-    customError: 'A data informada não pode ser maior que a atual.'
+    valueMissing: "O campo data de nascimento é obrigatório.",
+    customError: "A data informada não pode ser maior que a atual."
   },
   urlFoto: {
-    valueMissing: 'O campo de url da imagem não pode estar vazio.',
-    patternMismatch: 'O formato da url da imagem digitado não é válido.',
+    valueMissing: "O campo url de imagem é obrigatório.",
+    patternMismatch: "A URL informada não é válida. Tente um exemplo como 'https://www.google.com.br/'",
   },
-  observacoes: {
-    valueMissing: 'O campo de observacoes não pode estar vazio.'
-  }
 }
 
 const validadores = {
@@ -70,7 +67,7 @@ function validaNome(input) {
   const nome = input.value.trim()
   let mensagem = ''
 
-  if (nome.length <= 3) {
+  if (nome.length < 3) {
     mensagem = 'O nome deve conter, pelo menos, três caracteres.'
   }
 
@@ -81,7 +78,7 @@ function validaEspecie(input) {
   const especie = input.value.trim()
   let mensagem = ''
 
-  if (especie.length <= 2) {
+  if (especie.length < 2) {
     mensagem = 'O nome deve conter, pelo menos, 2 caracteres.'
   }
 
@@ -92,7 +89,7 @@ function validaRaca(input) {
   const raca = input.value.trim()
   let mensagem = ''
 
-  if (raca.length <= 2) {
+  if (raca.length < 2) {
     mensagem = 'O nome deve conter, pelo menos, 2 caracteres.'
   }
 

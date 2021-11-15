@@ -27,45 +27,45 @@ const tiposDeErro = [
 ]
 
 const mensagensDeErro = {
+  cnpj: {
+    valueMissing: "O campo CNPJ é obrigatório.",
+    patternMismatch: "O CNPJ informado não é válido. Tente o formato 'XX.XXX.XXX/XXXX-XX'",
+    customError: 'O CNPJ digitado não é válido.'
+  },
   nome: {
-    valueMissing: 'O campo de nome não pode estar vazio.',
-    customError: 'O nome deve conter, pelo menos, três caracteres.'
+    valueMissing: "O campo nome é obrigatório.",
+    customError: "O nome deve conter, pelo menos, 3 caracteres."
   },
   email: {
-    valueMissing: 'O campo de email não pode estar vazio.',
-    typeMismatch: 'O email digitado não é válido.'
+    valueMissing: "O campo e-mail é obrigatório.",
+    typeMismatch: "O e-mail informado não é válido. Tente o formato 'email@example.com'"
   },
   senha: {
     valueMissing: 'O campo de senha não pode estar vazio.',
     patternMismatch: 'A senha não contém uma das especificações informadas.'
   },
-  cnpj: {
-    valueMissing: 'O campo de CNPJ não pode estar vazio.',
-    patternMismatch: 'O formato do CNPJ digitado não é válido.',
-    customError: 'O CNPJ digitado não é válido.'
-  },
   cep: {
-    valueMissing: 'O campo de CEP não pode estar vazio.',
-    patternMismatch: 'O formato do CEP digitado não é válido.',
+    valueMissing: 'O campo CEP é obrigatório.',
+    patternMismatch: "O CEP informado não é válido. Tente o formato 'XXXXX-XXX'",
     customError: 'Não foi possível buscar o CEP.'
   },
   logradouro: {
-    valueMissing: 'O campo de logradouro não pode estar vazio.'
+    valueMissing: "O campo logradouro é obrigatório."
   },
   numero: {
-    valueMissing: 'O campo de número não pode estar vazio.'
+    valueMissing: "O campo numero é obrigatório."
   },
   bairro: {
-    valueMissing: 'O campo de bairro não pode estar vazio.'
+    valueMissing: "O campo bairro é obrigatório."
   },
   cidade: {
-    valueMissing: 'O campo de cidade não pode estar vazio.'
+    valueMissing: "O campo cidade é obrigatório."
   },
   estado: {
-    valueMissing: 'O campo de estado não pode estar vazio.'
+    valueMissing: "O campo estado é obrigatório."
   },
   telefone: {
-    valueMissing: 'O campo de telefone não pode estar vazio.'
+    valueMissing: "O campo telefone é obrigatório."
   },
   usuario: {
     customError: 'Nome de usuário já cadastrado.',
@@ -95,7 +95,7 @@ function validaNome(input) {
   const nome = input.value.trim()
   let mensagem = ''
 
-  if (nome.length <= 3) {
+  if (nome.length < 3) {
     mensagem = 'O nome deve conter, pelo menos, três caracteres.'
   }
 

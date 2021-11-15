@@ -12,7 +12,6 @@ const sexof = document.getElementById('f');
 const observacoes = document.getElementById('observacoes');
 const formulario = document.querySelector('[data-form]')
 const inputs = document.querySelectorAll('input')
-const textarea = document.getElementById('observacoes')
 
 formulario.addEventListener('submit', async (evento) => {
   evento.preventDefault()
@@ -38,11 +37,6 @@ formulario.addEventListener('submit', async (evento) => {
     console.log(erro)
     window.alert("Erro ao cadastrar Pet!")
   }
-})
-
-
-textarea.addEventListener('blur', (evento) => {
-  validarCamposDePet(evento.target)
 })
 
 inputs.forEach(input => {

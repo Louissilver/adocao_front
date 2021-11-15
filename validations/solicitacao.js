@@ -25,11 +25,26 @@ const tiposDeErro = [
 
 const mensagensDeErro = {
   referencias: {
-    valueMissing: 'O campo de observacoes não pode estar vazio.'
+    valueMissing: "O campo referencias é obrigatório.",
+    customError: "As referências informadas devem conter, pelo menos, 30 caracteres e espaços, formando um texto."
   }
 }
 
 const validadores = {
+  referencias: input => validaReferencias(input),
+}
+
+function validaReferencias(input) {
+  const referencias = input.value.trim()
+  let mensagem = ''
+  if (!input.validity.valueMissing) {
+
+    if (referencias.length < 30 || !(referencias.indexOf(' ') >= 0)) {
+      mensagem = "As referências informadas devem conter, pelo menos, 30 caracteres e espaços, formando um texto."
+    }
+  }
+
+  input.setCustomValidity(mensagem)
 }
 
 function mostraMensagemDeErro(tipoDeInput, input) {
