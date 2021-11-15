@@ -16,6 +16,7 @@ const inputs = document.querySelectorAll('input')
 
 formulario.addEventListener('submit', async (evento) => {
   evento.preventDefault()
+  const id_tipo_pessoa = sessionStorage.getItem('id_tipo_pessoa')
   try {
     const dados = {
       nome: nome.value,
@@ -30,8 +31,8 @@ formulario.addEventListener('submit', async (evento) => {
       numero: numero.value,
     }
 
-    await ongService.atualizarOng(dados)
-    window.alert("ONG cadastrado com sucesso!")
+    await ongService.atualizarOng(id_tipo_pessoa, dados)
+    window.alert("ONG alterada com sucesso!")
   }
   catch (erro) {
     console.log(erro)

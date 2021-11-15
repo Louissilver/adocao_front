@@ -17,13 +17,14 @@ const inputs = document.querySelectorAll('input')
 
 formulario.addEventListener('submit', async (evento) => {
   evento.preventDefault()
+  const id_tipo_pessoa = sessionStorage.getItem('id_tipo_pessoa')
   try {
     const dados = {
       nome: nome.value,
       email: email.value,
       cpf: cpf.value,
       telefone: telefone.value,
-      dataNascimento: new Date(dataNascimento.value).toLocaleDateString(),
+      dataNascimento: new Date(dataNascimento.value).toLocaleDateString('pt-BR', { timeZone: 'UTC' }),
       cep: cep.value,
       logradouro: logradouro.value,
       cidade: cidade.value,
@@ -32,8 +33,8 @@ formulario.addEventListener('submit', async (evento) => {
       numero: numero.value,
     }
 
-    await associadoService.atualizarAssociado(dados)
-    window.alert("Associado cadastrado com sucesso!")
+    await associadoService.atualizarAssociado(id_tipo_pessoa, dados)
+    window.alert("Associado atualizado com sucesso!")
   }
   catch (erro) {
     console.log(erro)

@@ -5,7 +5,7 @@ const criarElemento = (elemento) => {
 
   var data = new Date(elemento.dataNascimento)
   var ano_atual = new Date().getFullYear();
-  var mes_atual = new Date().getMonth();
+  var mes_atual = new Date().getMonth() + 1;
   var idade_anos = ano_atual - data.getFullYear()
   var idade_meses = mes_atual - data.getMonth()
   var idade_anos_string = `${idade_anos} anos`
@@ -46,7 +46,7 @@ const criarElemento = (elemento) => {
       <li class="list-group-item">Sexo: ${elemento.sexo}</li>
       <li class="list-group-item">Porte: ${elemento.porte}</li>
       <li class="list-group-item">Idade: ${idade_anos_string}${idade_meses_string}</li>
-      <li class="list-group-item">Data de nascimento: ${new Date(elemento.dataNascimento).toLocaleDateString()}</li>
+      <li class="list-group-item">Data de nascimento: ${new Date(elemento.dataNascimento).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</li>
     </ul>
   </div>
   <div class="modal-footer">
@@ -70,7 +70,6 @@ const render = async () => {
   const pet = await petService.detalhaPets(id)
   section.appendChild(criarElemento(pet))
 
-  console.log(pet.id_ong)
   const ong = await ongService.detalharOngs(pet.id_ong)
   title.textContent = `ONG: ${ong.nome}`
 }

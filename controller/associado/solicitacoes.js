@@ -16,7 +16,7 @@ const criarCardSolicitacao = (elemento) => {
                         <li class="list-group-item">ONG: ${elemento.nome_ong}</li>
                         <li class="list-group-item">Aprovado: ${elemento.aprovado ? "Sim" : "Não"}</li>
                         <li class="list-group-item">Finalizado: ${elemento.finalizado ? "Sim" : "Não"}</li>
-                        <li class="list-group-item">Data de solicitação: ${new Date(elemento.dataSolicitacao).toLocaleDateString()}</li>
+                        <li class="list-group-item">Data de solicitação: ${new Date(elemento.dataSolicitacao).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</li>
                     </ul>
                     <div class="card-body">
                         <a href="./solicitacoes/solicitacao.html?id=${elemento.id}" class="card-link">Ver mais</a>

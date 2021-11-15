@@ -1,7 +1,7 @@
+import { petService } from '../../../service/pet_service.js';
 import { solicitacao_adocaoService } from '../../../service/solicitacao_adocao_service.js';
 
-const criarElemento = (elemento) => {
-  console.log(elemento)
+const criarElemento = (elemento, pet) => {
   const section = document.createElement('section')
   const conteudo = `
   <div class="container-fluid">
@@ -24,30 +24,51 @@ const criarElemento = (elemento) => {
   <ul class="list-group list-group-flush">
   <li class="list-group-item">Aprovado: ${elemento.aprovado ? "Sim" : "Não"}</li>
   <li class="list-group-item">Finalizado: ${elemento.finalizado ? "Sim" : "Não"}</li>
-  <li class="list-group-item">Data da solicitação: ${new Date(elemento.dataSolicitacao).toLocaleDateString()}</li>
-  </ul>
+  <li class="list-group-item">Data da solicitação: ${new Date(elemento.dataSolicitacao).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</li>
+  <li class="${pet.adotado && (!elemento.aprovado && !elemento.finalizado) ? 'list-group-item list-group-item-danger' : ''}"> ${pet.adotado && (!elemento.aprovado && !elemento.finalizado) ? "O Pet já foi adotado através de outra solicitação" : ""}</li>  
+  </ul >
   <div class="modal-footer">
-  <button ${elemento.aprovado ? "disabled" : "enabled"} id="aprovar" type="button" class="btn btn-primary">Aprovar</button>
-  <button ${elemento.finalizado ? "disabled" : "enabled"} id="finalizar" type="button" class="btn btn-primary">Finalizar</button>
-  <button type="button" class="btn btn-secondary" onclick="window.history.back()">Voltar</button>
+    <button ${elemento.aprovado || pet.adotado ? "disabled" : "enabled"} id="aprovar" type="button" class="btn btn-primary">Aprovar</button>
+    <button ${elemento.finalizado || pet.adotado ? "disabled" : "enabled"} id="finalizar" type="button" class="btn btn-primary">Finalizar</button>
+    <button type="button" class="btn btn-secondary" onclick="window.history.back()">Voltar</button>
   </div>
-  </div>
-  </div>
-                `
+  </div >
+  </div >
+  `
   section.innerHTML = conteudo
   return section
 }
 
 const section = document.querySelector('[data-main-solicitacao]');
 
-const render = async () => {
+section.addEventListener('click', async (evento) => {
+  let ehBotaoDeAprovar = evento.target.id === 'aprovar'
+  let ehBotaoDeFinalizar = evento.target.id === 'finalizar'
+  if (ehBotaoDeAprovar) {
+    const pegaURL = new URL(window.location)
+    const id = pegaURL.searchParams.get('id')
+    await solicitacao_adocaoService.aprovarSolicitacao(id)
+    window.alert('Solicitação aprovada com sucesso!')
+    location.reload()
+  }
+  if (ehBotaoDeFinalizar) {
+    const pegaURL = new URL(window.location)
+    const id = pegaURL.searchParams.get('id')
+    await solicitacao_adocaoService.finalizarSolicitacao(id)
+    window.alert('Solicitação finalizada com sucesso!')
+    location.reload()
+  }
+})
+
+const detalharSolicitacao = async () => {
 
   const pegaURL = new URL(window.location)
 
   const id = pegaURL.searchParams.get('id')
 
   const solicitacao = await solicitacao_adocaoService.detalharSolicitacao(id)
-  section.appendChild(criarElemento(solicitacao))
+  const pet = await petService.detalhaPets(solicitacao.id_pet)
+  section.appendChild(criarElemento(solicitacao, pet))
 }
 
-render()
+detalharSolicitacao()

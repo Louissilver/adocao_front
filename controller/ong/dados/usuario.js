@@ -9,26 +9,27 @@ const inputs = document.querySelectorAll('input')
 
 formulario.addEventListener('submit', async (evento) => {
   evento.preventDefault()
+  const id_usuario = sessionStorage.getItem('id_usuario')
+
   try {
     const dados = {
       login: usuario.value,
       senha: senha.value,
     }
 
-    await usuarioService.atualizarUsuario(dados)
-    window.alert("Associado cadastrado com sucesso!")
+    await usuarioService.atualizarUsuario(id_usuario, dados)
+    window.alert("Usuário atualizado com sucesso!")
   }
   catch (erro) {
     console.log(erro)
-    window.alert("Erro ao cadastrar associado!")
+    window.alert("Erro ao atualizar usuários!")
   }
 })
 
 const detalharCampos = async () => {
-  const token = sessionStorage.getItem('token');
-  const usuarioAtual = await usuarioService.retornarUsuarioAtual(token)
+  const usuario_atual = sessionStorage.getItem('usuario_atual')
 
-  usuario.value = usuarioAtual.usuario_atual
+  usuario.value = usuario_atual
 }
 
 olho.addEventListener('mousedown', function () {

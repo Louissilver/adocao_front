@@ -26,7 +26,7 @@ formulario.addEventListener('submit', async (evento) => {
       email: email.value,
       cpf: cpf.value,
       telefone: telefone.value,
-      dataNascimento: new Date(dataNascimento.value).toLocaleDateString(),
+      dataNascimento: new Date(dataNascimento.value).toLocaleDateString('pt-BR', { timeZone: 'UTC' }),
       cep: cep.value,
       logradouro: logradouro.value,
       cidade: cidade.value,

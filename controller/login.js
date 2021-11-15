@@ -28,6 +28,7 @@ formulario.addEventListener('submit', async (evento) => {
     sessionStorage.setItem('usuario_atual', usuarioAtual.usuario_atual);
     sessionStorage.setItem('tipo_usuario', usuarioAtual.tipo_usuario);
     sessionStorage.setItem('id_tipo_pessoa', usuarioAtual.id_tipo_pessoa);
+    sessionStorage.setItem('id_usuario', usuarioAtual.id_usuario);
 
     if (usuarioAtual.tipo_usuario == "ONG") {
       window.location.href = `./ong/home.html`

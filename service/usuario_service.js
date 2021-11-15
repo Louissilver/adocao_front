@@ -40,7 +40,27 @@ const listarNomesDeUsuario = (input) => {
   }
 }
 
+const atualizarUsuario = (id, dados) => {
+  return fetch(`http://localhost:8000/usuarios/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      login: dados.login,
+      senha: dados.senha,
+    })
+  })
+    .then(resposta => {
+      if (resposta.ok) {
+        return resposta.body
+      }
+      throw new Error(resposta.body)
+    })
+}
+
 export const usuarioService = {
   retornarUsuarioAtual,
-  listarNomesDeUsuario
+  listarNomesDeUsuario,
+  atualizarUsuario
 }

@@ -24,12 +24,10 @@ formulario.addEventListener('submit', async (evento) => {
       especie: especie.value,
       porte: porte.value,
       raca: raca.value,
-      dataNascimento: dataNascimento.value,
+      dataNascimento: new Date(dataNascimento.value).toLocaleDateString('pt-BR', { timeZone: 'UTC' }),
       urlFoto: urlFoto.value,
       sexo: sexo,
       observacoes: observacoes.value,
-      bairro: bairro.value,
-      numero: numero.value,
       id_ong: id_ong
     }
 

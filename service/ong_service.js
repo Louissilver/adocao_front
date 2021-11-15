@@ -59,8 +59,38 @@ const cadastrarOng = (dados) => {
     })
 }
 
+const atualizarOng = (id, dados) => {
+  return fetch(`http://localhost:8000/ongs/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      nome: dados.nome,
+      email: dados.email,
+      telefone: dados.telefone,
+      endereco: {
+        cep: dados.cep,
+        logradouro: dados.logradouro,
+        numero: dados.numero,
+        bairro: dados.bairro,
+        cidade: dados.cidade,
+        estado: dados.estado,
+      },
+      cnpj: dados.cnpj,
+    })
+  })
+    .then(resposta => {
+      if (resposta.ok) {
+        return resposta.body
+      }
+      throw new Error(resposta.body)
+    })
+}
+
 export const ongService = {
   listarOngs,
   detalharOngs,
-  cadastrarOng
+  cadastrarOng,
+  atualizarOng
 }

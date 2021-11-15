@@ -23,7 +23,7 @@ formulario.addEventListener('submit', async (evento) => {
   try {
     const dados = {
       nome_pet: nomePet.value,
-      nome_ong: nomeOng.valueMissing,
+      nome_ong: nomeOng.value,
       cnpj_ong: cnpjOng.value,
       nome_associado: nomeAssociado.value,
       cpf_associado: cpf.value,
@@ -34,11 +34,11 @@ formulario.addEventListener('submit', async (evento) => {
     }
 
     await solicitacao_adocaoService.cadastrarSolicitacao(dados)
-    window.alert("Associado cadastrado com sucesso!")
+    window.alert("Solicitação cadastrada com sucesso!")
   }
   catch (erro) {
     console.log(erro)
-    window.alert("Erro ao cadastrar associado!")
+    window.alert("Erro ao cadastrar solicitação!")
   }
 })
 

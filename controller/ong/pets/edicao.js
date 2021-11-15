@@ -16,6 +16,8 @@ const textarea = document.getElementById('observacoes')
 
 formulario.addEventListener('submit', async (evento) => {
   evento.preventDefault()
+  const pegaURL = new URL(window.location)
+  const id = pegaURL.searchParams.get('id')
   const sexo = sexof.checked ? "F" : "M"
   const id_ong = sessionStorage.getItem("id_tipo_pessoa")
   try {
@@ -24,17 +26,15 @@ formulario.addEventListener('submit', async (evento) => {
       especie: especie.value,
       porte: porte.value,
       raca: raca.value,
-      dataNascimento: dataNascimento.value,
+      dataNascimento: new Date(dataNascimento.value).toLocaleDateString('pt-BR', { timeZone: 'UTC' }),
       urlFoto: urlFoto.value,
       sexo: sexo,
       observacoes: observacoes.value,
-      bairro: bairro.value,
-      numero: numero.value,
       id_ong: id_ong
     }
 
-    await petService.atualizarPet(dados)
-    window.alert("Pet cadastrado com sucesso!")
+    await petService.atualizarPet(id, dados)
+    window.alert("Pet atualizado com sucesso!")
   }
   catch (erro) {
     console.log(erro)

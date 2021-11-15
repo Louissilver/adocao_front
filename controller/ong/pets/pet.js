@@ -5,7 +5,7 @@ const criarElemento = (elemento) => {
 
   var data = new Date(elemento.dataNascimento)
   var ano_atual = new Date().getFullYear();
-  var mes_atual = new Date().getMonth();
+  var mes_atual = new Date().getMonth() + 1;
   var idade_anos = ano_atual - data.getFullYear()
   var idade_meses = mes_atual - data.getMonth()
   var idade_anos_string = `${idade_anos} anos`
@@ -22,6 +22,8 @@ const criarElemento = (elemento) => {
   if (idade_meses == 1) {
     idade_meses_string = ` ${idade_meses} mês`
   }
+
+
 
   const section = document.createElement('section')
   const conteudo = `
@@ -46,11 +48,12 @@ const criarElemento = (elemento) => {
       <li class="list-group-item">Sexo: ${elemento.sexo}</li>
       <li class="list-group-item">Porte: ${elemento.porte}</li>
       <li class="list-group-item">Idade: ${idade_anos_string}${idade_meses_string}</li>
-      <li class="list-group-item">Data de nascimento: ${new Date(elemento.dataNascimento).toLocaleDateString()}</li>
+      <li class="list-group-item">Data de nascimento: ${new Date(elemento.dataNascimento).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</li>
     </ul>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" onclick="window.location.href='./edicao.html?id=${elemento.id}'">Editar dados</button>
+    <button type="button" id="excluir" class="btn btn-danger">Excluir pet</button>
     <button type="button" class="btn btn-secondary" onclick="window.history.back()">Voltar</button>
   </div>
                   `
@@ -60,7 +63,7 @@ const criarElemento = (elemento) => {
 
 const section = document.querySelector('[data-main-pet]');
 
-const render = async () => {
+const detalharPet = async () => {
 
   const pegaURL = new URL(window.location)
 
@@ -68,8 +71,22 @@ const render = async () => {
 
   const pet = await petService.detalhaPets(id)
   section.appendChild(criarElemento(pet))
-
-  console.log(pet.id_ong)
 }
 
-render()
+section.addEventListener('click', async (evento) => {
+  let ehBotaoDeExcluir = evento.target.id === 'excluir'
+  if (ehBotaoDeExcluir) {
+
+    let resultado = window.confirm("Deseja mesmo excluir esse pet?")
+    if (resultado) {
+      const pegaURL = new URL(window.location)
+      const id = pegaURL.searchParams.get('id')
+      await petService.removerPet(id)
+      window.location.href = '../pets.html'
+    } else {
+      return
+    }
+  }
+})
+
+detalharPet()

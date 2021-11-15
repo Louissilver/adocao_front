@@ -1,12 +1,10 @@
 import { petService } from '../../service/pet_service.js'
-import { usuarioService } from '../../service/usuario_service.js'
-import { ongService } from '../../service/ong_service.js'
 
 const criarElemento = (elemento) => {
 
   var data = new Date(elemento.dataNascimento)
   var ano_atual = new Date().getFullYear();
-  var mes_atual = new Date().getMonth();
+  var mes_atual = new Date().getMonth() + 1;
   var idade_anos = ano_atual - data.getFullYear()
   var idade_meses = mes_atual - data.getMonth()
   var idade_anos_string = `${idade_anos} anos`

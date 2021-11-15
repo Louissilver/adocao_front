@@ -1,7 +1,6 @@
 import { solicitacao_adocaoService } from '../../../service/solicitacao_adocao_service.js';
 
 const criarElemento = (elemento) => {
-  console.log(elemento)
   const section = document.createElement('section')
   const conteudo = `
   <div class="container-fluid">
@@ -24,7 +23,7 @@ const criarElemento = (elemento) => {
   <ul class="list-group list-group-flush">
   <li class="list-group-item">Aprovado: ${elemento.aprovado ? "Sim" : "Não"}</li>
   <li class="list-group-item">Finalizado: ${elemento.finalizado ? "Sim" : "Não"}</li>
-  <li class="list-group-item">Data da solicitação: ${new Date(elemento.dataSolicitacao).toLocaleDateString()}</li>
+  <li class="list-group-item">Data da solicitação: ${new Date(elemento.dataSolicitacao).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</li>
   </ul>
   <div class="modal-footer">
   <button type="button" class="btn btn-secondary" onclick="window.history.back()">Voltar</button>
