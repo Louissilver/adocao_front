@@ -9,4 +9,19 @@ const detalharCampos = async () => {
   h2.textContent = `Seja bem vindo(a) ${ong.nome}`
 }
 
+const verificarPerfil = () => {
+  const token = sessionStorage.getItem("token")
+
+  if (token == null) {
+    window.location.href = '../../index.html';
+  }
+
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
+
+  if (tipo_usuario == "Associado") {
+    window.location.href = "../associado/home.html";
+  }
+}
+
+verificarPerfil()
 detalharCampos();

@@ -47,7 +47,7 @@ const criarElemento = (elemento) => {
 }
 
 const section = document.querySelector('[data-lista-pet]')
-const render = async () => {
+const listarPets = async () => {
     const pegaURL = new URL(window.location)
     const id = pegaURL.searchParams.get('id')
 
@@ -63,5 +63,19 @@ const render = async () => {
         section.appendChild(criarElemento(elemento));
     });
 }
+const verificarPerfil = () => {
+    const token = sessionStorage.getItem("token")
 
-render();
+    if (token == null) {
+        window.location.href = '../../index.html';
+    }
+
+    const tipo_usuario = sessionStorage.getItem("tipo_usuario")
+
+    if (tipo_usuario == "ONG") {
+        window.location.href = "../ong/home.html";
+    }
+}
+
+verificarPerfil()
+listarPets();

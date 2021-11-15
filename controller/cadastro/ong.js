@@ -69,3 +69,13 @@ inputs.forEach(input => {
     validarCamposDeOng(evento.target)
   })
 })
+
+const verificarPerfil = () => {
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
+  if (tipo_usuario == "ONG" || tipo_usuario == "Associado") {
+    sessionStorage.clear()
+    window.alert("Sessão encerrada!")
+  }
+}
+
+verificarPerfil()

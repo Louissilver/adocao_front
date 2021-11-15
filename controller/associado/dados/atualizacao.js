@@ -64,5 +64,19 @@ inputs.forEach(input => {
     validarCamposDeAssociado(evento.target)
   })
 })
+const verificarPerfil = () => {
+  const token = sessionStorage.getItem("token")
 
+  if (token == null) {
+    window.location.href = '../../../index.html';
+  }
+
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
+
+  if (tipo_usuario == "ONG") {
+    window.location.href = "../../ong/home.html";
+  }
+}
+
+verificarPerfil()
 detalharCampos();

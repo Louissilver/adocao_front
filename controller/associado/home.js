@@ -50,7 +50,7 @@ const criarElemento = (elemento) => {
 const section = document.querySelector('[data-lista-pets]');
 const h2 = document.querySelector('[data-nome]');
 
-const render = async () => {
+const detalharHome = async () => {
   const id_associado = sessionStorage.getItem('id_tipo_pessoa')
   const associado = await associadoService.detalharAssociado(id_associado)
 
@@ -68,5 +68,19 @@ const render = async () => {
     section.appendChild(criarElemento(elemento));
   });
 }
+const verificarPerfil = () => {
+  const token = sessionStorage.getItem("token")
 
-render();
+  if (token == null) {
+    window.location.href = '../../index.html';
+  }
+
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
+
+  if (tipo_usuario == "ONG") {
+    window.location.href = "../ong/home.html";
+  }
+}
+
+verificarPerfil()
+detalharHome();

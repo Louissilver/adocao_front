@@ -61,7 +61,7 @@ const criarElemento = (elemento) => {
 const section = document.querySelector('[data-main-pet]');
 const title = document.querySelector('[data-nome-ong]');
 
-const render = async () => {
+const detalhaPet = async () => {
 
   const pegaURL = new URL(window.location)
 
@@ -73,5 +73,19 @@ const render = async () => {
   const ong = await ongService.detalharOngs(pet.id_ong)
   title.textContent = `ONG: ${ong.nome}`
 }
+const verificarPerfil = () => {
+  const token = sessionStorage.getItem("token")
 
-render()
+  if (token == null) {
+    window.location.href = '../../../index.html';
+  }
+
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
+
+  if (tipo_usuario == "ONG") {
+    window.location.href = "../../ong/home.html";
+  }
+}
+
+verificarPerfil()
+detalhaPet()

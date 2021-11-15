@@ -31,7 +31,7 @@ const criarElemento = (elemento) => {
 const section = document.querySelector('[data-main-ong]');
 const title = document.querySelector('[data-nome-ong]');
 
-const render = async () => {
+const detalhaOng = async () => {
 
   const pegaURL = new URL(window.location)
 
@@ -41,5 +41,19 @@ const render = async () => {
   section.appendChild(criarElemento(ong))
   title.textContent = `ONG: ${ong.nome}`
 }
+const verificarPerfil = () => {
+  const token = sessionStorage.getItem("token")
 
-render()
+  if (token == null) {
+    window.location.href = '../../../index.html';
+  }
+
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
+
+  if (tipo_usuario == "ONG") {
+    window.location.href = "../../ong/home.html";
+  }
+}
+
+verificarPerfil()
+detalhaOng()

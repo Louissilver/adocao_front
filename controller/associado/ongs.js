@@ -26,11 +26,25 @@ const criarElemento = (elemento) => {
 
 const section = document.querySelector('[data-lista-ongs]')
 
-const render = async () => {
+const listarOngs = async () => {
   const ongs = await ongService.listarOngs();
   ongs.forEach(elemento => {
     section.appendChild(criarElemento(elemento));
   });
 }
+const verificarPerfil = () => {
+  const token = sessionStorage.getItem("token")
 
-render();
+  if (token == null) {
+    window.location.href = '../../index.html';
+  }
+
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
+
+  if (tipo_usuario == "ONG") {
+    window.location.href = "../ong/home.html";
+  }
+}
+
+verificarPerfil()
+listarOngs();

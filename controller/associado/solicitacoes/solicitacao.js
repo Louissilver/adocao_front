@@ -37,7 +37,7 @@ const criarElemento = (elemento) => {
 
 const section = document.querySelector('[data-main-solicitacao]');
 
-const render = async () => {
+const detalhaSolicitacao = async () => {
 
   const pegaURL = new URL(window.location)
 
@@ -46,5 +46,19 @@ const render = async () => {
   const solicitacao = await solicitacao_adocaoService.detalharSolicitacao(id)
   section.appendChild(criarElemento(solicitacao))
 }
+const verificarPerfil = () => {
+  const token = sessionStorage.getItem("token")
 
-render()
+  if (token == null) {
+    window.location.href = '../../../index.html';
+  }
+
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
+
+  if (tipo_usuario == "ONG") {
+    window.location.href = "../../ong/home.html";
+  }
+}
+
+verificarPerfil()
+detalhaSolicitacao()
