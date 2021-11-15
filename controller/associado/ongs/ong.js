@@ -1,6 +1,8 @@
 import { ongService } from '../../../service/ong_service.js';
+import { retornarLatitudeLongitude } from '../../../service/position_service.js';
 
-const criarElemento = (elemento) => {
+const criarElemento = (elemento, geolocalizacao) => {
+  console.log(geolocalizacao.data[0].latitude)
   const section = document.createElement('section')
   const conteudo = `
   <div class="container-fluid">
@@ -20,7 +22,7 @@ const criarElemento = (elemento) => {
   </div>
   </div>
   <div>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13844.148064968642!2d-51.1689972!3d-29.834353299999993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1636234685660!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  <iframe src="https://maps.google.com/maps?q=${geolocalizacao.data[0].latitude},${geolocalizacao.data[0].longitude}&hl=es;z=14&amp;output=embed" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
   </div>
   </div>
                 `
@@ -38,7 +40,9 @@ const detalhaOng = async () => {
   const id = pegaURL.searchParams.get('id')
 
   const ong = await ongService.detalharOngs(id)
-  section.appendChild(criarElemento(ong))
+  const endereco = `${ong.endereco.numero} ${ong.endereco.logradouro}, ${ong.endereco.cidade}`
+  const geolocalizacao = await retornarLatitudeLongitude(endereco)
+  section.appendChild(criarElemento(ong, geolocalizacao))
   title.textContent = `ONG: ${ong.nome}`
 }
 const verificarPerfil = () => {
