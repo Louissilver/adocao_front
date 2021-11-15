@@ -18,6 +18,8 @@ const criarElemento = (elemento, pet) => {
   <ul class="list-group list-group-flush">
   <li class="list-group-item">Nome do associado: ${elemento.nome_associado}</li>
   <li class="list-group-item">CPF do associado: ${elemento.cpf_associado}</li>
+  <li class="list-group-item">E-mail do associado: ${elemento.email_associado}</li>
+  <li class="list-group-item">Telefone do associado: ${elemento.telefone_associado}</li>
   <li class="list-group-item">Referências para adoção: ${elemento.referencias}</li>
   </ul>
   <p class="text-muted my-3">Situação</p>

@@ -7,8 +7,12 @@ import { validarCamposDeSolicitacao } from "../../../validations/solicitacao.js"
 const nomePet = document.getElementById('nomePet')
 const nomeOng = document.getElementById('nomeOng')
 const cnpjOng = document.getElementById('cnpjOng')
+const emailOng = document.getElementById('emailOng')
+const telefoneOng = document.getElementById('telefoneOng')
 const nomeAssociado = document.getElementById('nomeAssociado')
 const cpf = document.getElementById('cpf')
+const emailAssociado = document.getElementById('emailAssociado')
+const telefoneAssociado = document.getElementById('telefoneAssociado')
 const referencias = document.getElementById('referencias')
 const formulario = document.querySelector('[data-form]')
 
@@ -25,8 +29,12 @@ formulario.addEventListener('submit', async (evento) => {
       nome_pet: nomePet.value,
       nome_ong: nomeOng.value,
       cnpj_ong: cnpjOng.value,
+      email_ong: emailOng.value,
+      telefone_ong: telefoneOng.value,
       nome_associado: nomeAssociado.value,
       cpf_associado: cpf.value,
+      email_associado: emailAssociado.value,
+      telefone_associado: telefoneAssociado.value,
       referencias: referencias.value,
       id_pet: id_pet,
       id_associado: id_associado,
@@ -55,8 +63,12 @@ const detalharCampos = async () => {
   nomePet.value = pet.nome
   nomeOng.value = ong.nome
   cnpjOng.value = ong.cnpj
+  emailOng.value = ong.email
+  telefoneOng.value = ong.telefone
   nomeAssociado.value = associado.nome
   cpf.value = associado.cpf
+  emailAssociado.value = associado.email
+  telefoneAssociado.value = associado.telefone
 }
 
 referencias.addEventListener('blur', (evento) => {

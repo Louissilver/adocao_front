@@ -12,6 +12,8 @@ const criarElemento = (elemento) => {
   <ul class="list-group list-group-flush">
   <li class="list-group-item">Nome da ONG: ${elemento.nome_ong}</li>
   <li class="list-group-item">CNPJ da ONG: ${elemento.cnpj_ong}</li>
+  <li class="list-group-item">E-mail da ONG: ${elemento.email_ong}</li>
+  <li class="list-group-item">Telefone da ONG: ${elemento.telefone_ong}</li>
   </ul>
   <p class="text-muted my-3">Associado</p>
   <ul class="list-group list-group-flush">

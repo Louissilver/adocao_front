@@ -58,19 +58,36 @@
               </div>
             </div>
           </div>
-
           <div class="row">
+
             <p class="text-muted my-3">Dados da ONG</p>
             <hr />
-            <div class="col-md my-3">
-              <label class="form-label" for="nomeOng">* Nome da ONG:</label>
-              <input type="text" class="form-control-sm form-control" id="nomeOng" placeholder="Nome completo da ONG"
-                readonly>
-            </div>
-            <div class="col-md my-3">
-              <label class="form-label" for="cnpjOng">* CNPJ da ONG:</label>
-              <input type="text" class="form-control-sm form-control" id="cnpjOng" placeholder="99.999.999/0009-99"
-                readonly>
+            <div class="col">
+
+              <div class="row">
+                <div class="col-md my-3">
+                  <label class="form-label" for="nomeOng">* Nome da ONG:</label>
+                  <input type="text" class="form-control-sm form-control" id="nomeOng"
+                    placeholder="Nome completo da ONG" readonly>
+                </div>
+                <div class="col-md my-3">
+                  <label class="form-label" for="cnpjOng">* CNPJ da ONG:</label>
+                  <input type="text" class="form-control-sm form-control" id="cnpjOng" placeholder="99.999.999/0009-99"
+                    readonly>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md my-3">
+                  <label class="form-label" for="emailOng">* E-mail da ONG:</label>
+                  <input type="text" class="form-control-sm form-control" id="emailOng" placeholder="email@example.com"
+                    readonly>
+                </div>
+                <div class="col-md my-3">
+                  <label class="form-label" for="telefoneOng">* Telefone da ONG:</label>
+                  <input type="text" class="form-control-sm form-control" id="telefoneOng" placeholder="(51)98888-8888"
+                    readonly>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -90,6 +107,20 @@
                     readonly>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-md my-3">
+                  <label class="form-label" for="emailAssociado">* E-mail do associado:</label>
+                  <input type="text" class="form-control-sm form-control" id="emailAssociado"
+                    placeholder="email@example.com" readonly>
+                </div>
+                <div class="col-md my-3">
+                  <label class="form-label" for="telefoneAssociado">* Telefone do associado:</label>
+                  <input type="text" class="form-control-sm form-control" id="telefoneAssociado"
+                    placeholder="(51)98888-8888" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-md my-3">
                 <label class="form-label" for="referencias">* Referências do associado:</label>
                 <textarea type="text" class="form-control-sm form-control" id="referencias"
@@ -99,6 +130,7 @@
               </div>
             </div>
           </div>
+
         </div>
         <button type="submit" class="btn btn-primary my-3">Enviar</button>
         <button type="button" class="btn btn-secondary my-4" onclick="window.history.back()">Voltar</button>

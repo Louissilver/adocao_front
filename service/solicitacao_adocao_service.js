@@ -37,8 +37,12 @@ const cadastrarSolicitacao = (dados) => {
       nome_pet: dados.nome_pet,
       nome_ong: dados.nome_ong,
       cnpj_ong: dados.cnpj_ong,
+      email_ong: dados.email_ong,
+      telefone_ong: dados.telefone_ong,
       nome_associado: dados.nome_associado,
       cpf_associado: dados.cpf_associado,
+      email_associado: dados.email_associado,
+      telefone_associado: dados.telefone_associado,
       referencias: dados.referencias,
     })
   })
