@@ -84,11 +84,23 @@ const finalizarSolicitacao = (id) => {
     })
 }
 
+const removerSolicitacao = (id) => {
+  return fetch(`http://localhost:8000/adocao/solicitacoes/${id}`, {
+    method: 'DELETE'
+  })
+    .then(resposta => {
+      if (!resposta.ok) {
+        throw new Error('Não foi possível deletar uma solicitação')
+      }
+    })
+}
+
 
 export const solicitacao_adocaoService = {
   listarSolicitacoes,
   detalharSolicitacao,
   cadastrarSolicitacao,
   aprovarSolicitacao,
-  finalizarSolicitacao
+  finalizarSolicitacao,
+  removerSolicitacao
 }

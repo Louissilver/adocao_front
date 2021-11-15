@@ -29,6 +29,7 @@ const criarElemento = (elemento) => {
   </ul>
   <div class="modal-footer">
   <button type="button" class="btn btn-secondary" onclick="window.history.back()">Voltar</button>
+  <button type="button" id="excluir" class="btn btn-danger">Excluir solicitação</button>
   </div>
   </div>
   </div>
@@ -38,6 +39,22 @@ const criarElemento = (elemento) => {
 }
 
 const section = document.querySelector('[data-main-solicitacao]');
+
+section.addEventListener('click', async (evento) => {
+  let ehBotaoDeExcluir = evento.target.id === 'excluir'
+  if (ehBotaoDeExcluir) {
+
+    let resultado = window.confirm("Deseja mesmo excluir essa solicitação?")
+    if (resultado) {
+      const pegaURL = new URL(window.location)
+      const id = pegaURL.searchParams.get('id')
+      await solicitacao_adocaoService.removerSolicitacao(id)
+      window.location.href = '../solicitacoes.html'
+    } else {
+      return
+    }
+  }
+})
 
 const detalhaSolicitacao = async () => {
 
