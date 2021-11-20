@@ -1,7 +1,23 @@
-import { ongService } from '../../service/ong_service.js'
+import { ongService } from "../../service/ong_service.js";
+
+const verificarPerfil = () => {
+  const token = sessionStorage.getItem("token");
+
+  if (token == null) {
+    window.location.href = "../../index.html";
+  }
+
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario");
+
+  if (tipo_usuario == "ONG") {
+    window.location.href = "../ong/home.html";
+  }
+}
+
+verificarPerfil();
 
 const criarElemento = (elemento) => {
-  const div = document.createElement('div')
+  const div = document.createElement("div");
   const conteudo = `
             <article class="col" id=${elemento.id}>
                 <div class="card">
@@ -19,12 +35,12 @@ const criarElemento = (elemento) => {
                     </div>
                 </div>
             </article>
-                  `
-  div.innerHTML = conteudo
-  return div
+                  `;
+  div.innerHTML = conteudo;
+  return div;
 }
 
-const section = document.querySelector('[data-lista-ongs]')
+const section = document.querySelector("[data-lista-ongs]");
 
 const listarOngs = async () => {
   const ongs = await ongService.listarOngs();
@@ -32,19 +48,5 @@ const listarOngs = async () => {
     section.appendChild(criarElemento(elemento));
   });
 }
-const verificarPerfil = () => {
-  const token = sessionStorage.getItem("token")
 
-  if (token == null) {
-    window.location.href = '../../index.html';
-  }
-
-  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
-
-  if (tipo_usuario == "ONG") {
-    window.location.href = "../ong/home.html";
-  }
-}
-
-verificarPerfil()
 listarOngs();

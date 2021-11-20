@@ -1,8 +1,8 @@
 const autenticarUsuario = (usuario, senha) => {
   return fetch(`http://localhost:8000/token`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       login: usuario,
@@ -11,16 +11,16 @@ const autenticarUsuario = (usuario, senha) => {
   })
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.json()
+        return resposta.json();
       }
-      throw new Error('Não foi possível realizar a autenticação')
+      throw new Error("Não foi possível realizar a autenticação");
     })
     .then(json => {
-      return json
+      return json;
     })
 }
 
 
 export const autenticacaoService = {
   autenticarUsuario,
-}
+};

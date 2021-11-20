@@ -2,12 +2,12 @@ const listarPets = () => {
   return fetch(`http://localhost:8000/pets`)
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.json()
+        return resposta.json();
       }
-      throw new Error('Não foi possível listar os pets')
+      throw new Error("Não foi possível listar os pets");
     })
     .then(json => {
-      return json
+      return json;
     })
 }
 
@@ -15,20 +15,20 @@ const detalhaPets = (id) => {
   return fetch(`http://localhost:8000/pets/${id}`)
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.json()
+        return resposta.json();
       }
-      throw new Error('Não foi possível listar os pets')
+      throw new Error("Não foi possível listar os pets");
     })
     .then(json => {
-      return json
+      return json;
     })
 }
 
 const cadastrarPet = (dados) => {
   return fetch(`http://localhost:8000/pets`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       nome: dados.nome,
@@ -46,17 +46,17 @@ const cadastrarPet = (dados) => {
   })
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.body
+        return resposta.body;
       }
-      throw new Error(resposta.body)
+      throw new Error(resposta.body);
     })
-}
+};
 
 const atualizarPet = (id, dados) => {
   return fetch(`http://localhost:8000/pets/${id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       nome: dados.nome,
@@ -73,22 +73,22 @@ const atualizarPet = (id, dados) => {
   })
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.body
+        return resposta.body;
       }
-      throw new Error(resposta.body)
+      throw new Error(resposta.body);
     })
-}
+};
 
 const removerPet = (id) => {
   return fetch(`http://localhost:8000/pets/${id}`, {
-    method: 'DELETE'
+    method: "DELETE"
   })
     .then(resposta => {
       if (!resposta.ok) {
-        throw new Error('Não foi possível deletar um pet')
+        throw new Error("Não foi possível deletar um pet");
       }
     })
-}
+};
 
 
 export const petService = {
@@ -97,4 +97,4 @@ export const petService = {
   cadastrarPet,
   atualizarPet,
   removerPet
-}
+};

@@ -1,27 +1,27 @@
 export function validarCamposDeSolicitacao(input) {
-  const tipoDeInput = input.dataset.tipo
+  const tipoDeInput = input.dataset.tipo;
 
   if (validadores[tipoDeInput]) {
-    validadores[tipoDeInput](input)
+    validadores[tipoDeInput](input);
   }
 
   if (input.validity.valid) {
-    input.parentElement.classList.remove('is-invalid')
-    input.classList.remove('is-invalid')
-    input.parentElement.querySelector('.invalid-feedback').innerHTML = ''
+    input.parentElement.classList.remove("is-invalid");
+    input.classList.remove("is-invalid");
+    input.parentElement.querySelector(".invalid-feedback").innerHTML = "";
   } else {
-    input.parentElement.classList.add('is-invalid')
-    input.classList.add('is-invalid')
-    input.parentElement.querySelector('.invalid-feedback').innerHTML = mostraMensagemDeErro(tipoDeInput, input)
+    input.parentElement.classList.add("is-invalid");
+    input.classList.add("is-invalid");
+    input.parentElement.querySelector(".invalid-feedback").innerHTML = mostraMensagemDeErro(tipoDeInput, input);
   }
 }
 
 const tiposDeErro = [
-  'valueMissing',
-  'typeMismatch',
-  'patternMismatch',
-  'customError'
-]
+  "valueMissing",
+  "typeMismatch",
+  "patternMismatch",
+  "customError"
+];
 
 const mensagensDeErro = {
   referencias: {
@@ -35,24 +35,24 @@ const validadores = {
 }
 
 function validaReferencias(input) {
-  const referencias = input.value.trim()
-  let mensagem = ''
+  const referencias = input.value.trim();
+  let mensagem = "";
   if (!input.validity.valueMissing) {
 
-    if (referencias.length < 30 || !(referencias.indexOf(' ') >= 0)) {
+    if (referencias.length < 30 || !(referencias.indexOf(" ") >= 0)) {
       mensagem = "As referências informadas devem conter, pelo menos, 30 caracteres e espaços, formando um texto."
     }
   }
 
-  input.setCustomValidity(mensagem)
+  input.setCustomValidity(mensagem);
 }
 
 function mostraMensagemDeErro(tipoDeInput, input) {
-  let mensagem = ''
+  let mensagem = "";
   tiposDeErro.forEach(erro => {
     if (input.validity[erro]) {
-      mensagem = mensagensDeErro[tipoDeInput][erro]
+      mensagem = mensagensDeErro[tipoDeInput][erro];
     }
   })
-  return mensagem
+  return mensagem;
 }

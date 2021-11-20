@@ -1,25 +1,34 @@
 import { ongService } from "../../service/ong_service.js";
 import { validarCamposDeOng } from "../../validations/ong.js";
 
+const verificarPerfil = () => {
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario");
+  if (tipo_usuario == "ONG" || tipo_usuario == "Associado") {
+    sessionStorage.clear();
+    window.alert("Sessão encerrada!");
+  }
+}
 
-const nome = document.getElementById('nome')
-const email = document.getElementById('email')
-const cnpj = document.getElementById('cnpj')
-const telefone = document.getElementById('telefone')
-const cep = document.getElementById('cep')
-const logradouro = document.getElementById('logradouro');
-const cidade = document.getElementById('cidade');
-const estado = document.getElementById('estado');
-const bairro = document.getElementById('bairro');
-const numero = document.getElementById('numero');
-const usuario = document.getElementById('usuario')
-const senha = document.getElementById('senha')
-const olho = document.getElementById('olho')
-const formulario = document.querySelector('[data-form]')
-const inputs = document.querySelectorAll('input')
+verificarPerfil();
 
-formulario.addEventListener('submit', async (evento) => {
-  evento.preventDefault()
+const nome = document.getElementById("nome");
+const email = document.getElementById("email");
+const cnpj = document.getElementById("cnpj");
+const telefone = document.getElementById("telefone");
+const cep = document.getElementById("cep");
+const logradouro = document.getElementById("logradouro");
+const cidade = document.getElementById("cidade");
+const estado = document.getElementById("estado");
+const bairro = document.getElementById("bairro");
+const numero = document.getElementById("numero");
+const usuario = document.getElementById("usuario");
+const senha = document.getElementById("senha");
+const olho = document.getElementById("olho");
+const formulario = document.querySelector("[data-form]");
+const inputs = document.querySelectorAll("input");
+
+formulario.addEventListener("submit", async (evento) => {
+  evento.preventDefault();
   try {
     const dados = {
       nome: nome.value,
@@ -36,12 +45,12 @@ formulario.addEventListener('submit', async (evento) => {
       senha: senha.value,
     }
 
-    await ongService.cadastrarONG(dados)
-    window.alert("ONG cadastrado com sucesso!")
+    await ongService.cadastrarONG(dados);
+    window.alert("ONG cadastrado com sucesso!");
   }
   catch (erro) {
-    console.log(erro)
-    window.alert("Erro ao cadastrar ONG!")
+    console.log(erro);
+    window.alert("Erro ao cadastrar ONG!");
   }
 })
 
@@ -50,32 +59,22 @@ export const preencherCamposComCEP = (dados) => {
   cidade.value = dados.localidade;
   estado.value = dados.uf;
   bairro.value = dados.bairro;
-}
+};
 
-olho.addEventListener('mousedown', function () {
-  senha.type = 'text';
+olho.addEventListener("mousedown", function () {
+  senha.type = "text";
 });
 
-olho.addEventListener('mouseup', function () {
-  senha.type = 'password';
+olho.addEventListener("mouseup", function () {
+  senha.type = "password";
 });
 
-olho.addEventListener('mousemove', function () {
-  senha.type = 'password';
+olho.addEventListener("mousemove", function () {
+  senha.type = "password";
 });
 
 inputs.forEach(input => {
-  input.addEventListener('blur', (evento) => {
-    validarCamposDeOng(evento.target)
+  input.addEventListener("blur", (evento) => {
+    validarCamposDeOng(evento.target);
   })
 })
-
-const verificarPerfil = () => {
-  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
-  if (tipo_usuario == "ONG" || tipo_usuario == "Associado") {
-    sessionStorage.clear()
-    window.alert("Sessão encerrada!")
-  }
-}
-
-verificarPerfil()

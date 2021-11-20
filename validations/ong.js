@@ -1,36 +1,36 @@
-import { recuperarCEP } from "../service/cep_service.js"
-import { usuarioService } from "../service/usuario_service.js"
+import { recuperarCEP } from "../service/cep_service.js";
+import { usuarioService } from "../service/usuario_service.js";
 
 export function validarCamposDeOng(input) {
-  const tipoDeInput = input.dataset.tipo
+  const tipoDeInput = input.dataset.tipo;
 
   if (validadores[tipoDeInput]) {
-    validadores[tipoDeInput](input)
+    validadores[tipoDeInput](input);
   }
 
   if (input.validity.valid) {
-    input.parentElement.classList.remove('is-invalid')
-    input.classList.remove('is-invalid')
-    input.parentElement.querySelector('.invalid-feedback').innerHTML = ''
+    input.parentElement.classList.remove("is-invalid");
+    input.classList.remove("is-invalid");
+    input.parentElement.querySelector(".invalid-feedback").innerHTML = "";
   } else {
-    input.parentElement.classList.add('is-invalid')
-    input.classList.add('is-invalid')
-    input.parentElement.querySelector('.invalid-feedback').innerHTML = mostraMensagemDeErro(tipoDeInput, input)
+    input.parentElement.classList.add("is-invalid");
+    input.classList.add("is-invalid");
+    input.parentElement.querySelector(".invalid-feedback").innerHTML = mostraMensagemDeErro(tipoDeInput, input);
   }
 }
 
 const tiposDeErro = [
-  'valueMissing',
-  'typeMismatch',
-  'patternMismatch',
-  'customError'
-]
+  "valueMissing",
+  "typeMismatch",
+  "patternMismatch",
+  "customError"
+];
 
 const mensagensDeErro = {
   cnpj: {
     valueMissing: "O campo CNPJ é obrigatório.",
     patternMismatch: "O CNPJ informado não é válido. Tente o formato 'XX.XXX.XXX/XXXX-XX'",
-    customError: 'O CNPJ digitado não é válido.'
+    customError: "O CNPJ digitado não é válido."
   },
   nome: {
     valueMissing: "O campo nome é obrigatório.",
@@ -41,13 +41,13 @@ const mensagensDeErro = {
     typeMismatch: "O e-mail informado não é válido. Tente o formato 'email@example.com'"
   },
   senha: {
-    valueMissing: 'O campo de senha não pode estar vazio.',
-    patternMismatch: 'A senha não contém uma das especificações informadas.'
+    valueMissing: "O campo de senha não pode estar vazio.",
+    patternMismatch: "A senha não contém uma das especificações informadas."
   },
   cep: {
-    valueMissing: 'O campo CEP é obrigatório.',
+    valueMissing: "O campo CEP é obrigatório.",
     patternMismatch: "O CEP informado não é válido. Tente o formato 'XXXXX-XXX'",
-    customError: 'Não foi possível buscar o CEP.'
+    customError: "Não foi possível buscar o CEP."
   },
   logradouro: {
     valueMissing: "O campo logradouro é obrigatório."
@@ -68,10 +68,10 @@ const mensagensDeErro = {
     valueMissing: "O campo telefone é obrigatório."
   },
   usuario: {
-    customError: 'Nome de usuário já cadastrado.',
-    valueMissing: 'O campo de usuário não pode estar vazio.'
+    customError: "Nome de usuário já cadastrado.",
+    valueMissing: "O campo de usuário não pode estar vazio."
   },
-}
+};
 
 const validadores = {
   nome: input => validaNome(input),
@@ -81,32 +81,32 @@ const validadores = {
 }
 
 function mostraMensagemDeErro(tipoDeInput, input) {
-  let mensagem = ''
+  let mensagem = "";
   tiposDeErro.forEach(erro => {
     if (input.validity[erro]) {
-      mensagem = mensagensDeErro[tipoDeInput][erro]
+      mensagem = mensagensDeErro[tipoDeInput][erro];
     }
   })
 
-  return mensagem
+  return mensagem;
 }
 
 function validaNome(input) {
-  const nome = input.value.trim()
-  let mensagem = ''
+  const nome = input.value.trim();
+  let mensagem = "";
 
   if (nome.length < 3) {
-    mensagem = 'O nome deve conter, pelo menos, três caracteres.'
+    mensagem = "O nome deve conter, pelo menos, três caracteres.";
   }
 
-  input.setCustomValidity(mensagem)
+  input.setCustomValidity(mensagem);
 }
 
 function validaCNPJ(input) {
 
-  const cnpj = input.value.replace(/[^\d]+/g, '');
+  const cnpj = input.value.replace(/[^\d]+/g, "");
 
-  if (cnpj == '') return false;
+  if (cnpj == "") return false;
 
   if (cnpj.length != 14)
     return false;
@@ -123,7 +123,7 @@ function validaCNPJ(input) {
     cnpj == "99999999999999")
     return false;
 
-  let tamanho = cnpj.length - 2
+  let tamanho = cnpj.length - 2;
   let numeros = cnpj.substring(0, tamanho);
   let digitos = cnpj.substring(tamanho);
   let soma = 0;

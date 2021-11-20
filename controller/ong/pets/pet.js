@@ -1,31 +1,25 @@
-import { ongService } from '../../../service/ong_service.js';
-import { petService } from '../../../service/pet_service.js'
+import { petService } from "../../../service/pet_service.js";
+import { retornarIdadePet } from "../../../helpers/dataHelper.js";
+
+const verificarPerfil = () => {
+  const token = sessionStorage.getItem("token");
+
+  if (token == null) {
+    window.location.href = "../../../index.html";
+  }
+
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario");
+
+  if (tipo_usuario == "Associado") {
+    window.location.href = "../../associado/home.html";
+  }
+}
+
+verificarPerfil();
 
 const criarElemento = (elemento) => {
-
-  var data = new Date(elemento.dataNascimento)
-  var ano_atual = new Date().getFullYear();
-  var mes_atual = new Date().getMonth() + 1;
-  var idade_anos = ano_atual - data.getFullYear()
-  var idade_meses = mes_atual - data.getMonth()
-  var idade_anos_string = `${idade_anos} anos`
-  var idade_meses_string = ` ${idade_meses} meses`
-  if (idade_anos == 0) {
-    idade_anos_string = ''
-  }
-  if (idade_meses == 0) {
-    idade_meses_string = ''
-  }
-  if (idade_anos == 1) {
-    idade_anos_string = `${idade_anos} ano`
-  }
-  if (idade_meses == 1) {
-    idade_meses_string = ` ${idade_meses} mês`
-  }
-
-
-
-  const section = document.createElement('section')
+  const idadeCompleta = retornarIdadePet(elemento.dataNascimento);
+  const section = document.createElement("section");
   const conteudo = `
     <div class="modal-header">
     <div>
@@ -47,8 +41,8 @@ const criarElemento = (elemento) => {
       <li class="list-group-item">Raça: ${elemento.raca}</li>
       <li class="list-group-item">Sexo: ${elemento.sexo}</li>
       <li class="list-group-item">Porte: ${elemento.porte}</li>
-      <li class="list-group-item">Idade: ${idade_anos_string}${idade_meses_string}</li>
-      <li class="list-group-item">Data de nascimento: ${new Date(elemento.dataNascimento).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</li>
+      <li class="list-group-item">Idade: ${idadeCompleta}</li>
+      <li class="list-group-item">Data de nascimento: ${new Date(elemento.dataNascimento).toLocaleDateString("pt-BR", { timeZone: "UTC" })}</li>
     </ul>
   </div>
   <div class="modal-footer">
@@ -56,51 +50,37 @@ const criarElemento = (elemento) => {
     <button type="button" id="excluir" class="btn btn-danger">Excluir pet</button>
     <button type="button" class="btn btn-secondary" onclick="window.history.back()">Voltar</button>
   </div>
-                  `
-  section.innerHTML = conteudo
-  return section
+                  `;
+  section.innerHTML = conteudo;
+  return section;
 }
 
-const section = document.querySelector('[data-main-pet]');
+const section = document.querySelector("[data-main-pet]");
 
 const detalharPet = async () => {
 
-  const pegaURL = new URL(window.location)
+  const pegaURL = new URL(window.location);
 
-  const id = pegaURL.searchParams.get('id')
+  const id = pegaURL.searchParams.get("id");
 
-  const pet = await petService.detalhaPets(id)
-  section.appendChild(criarElemento(pet))
+  const pet = await petService.detalhaPets(id);
+  section.appendChild(criarElemento(pet));
 }
 
-section.addEventListener('click', async (evento) => {
-  let ehBotaoDeExcluir = evento.target.id === 'excluir'
+section.addEventListener("click", async (evento) => {
+  let ehBotaoDeExcluir = evento.target.id === "excluir";
   if (ehBotaoDeExcluir) {
 
-    let resultado = window.confirm("Deseja mesmo excluir esse pet?")
+    let resultado = window.confirm("Deseja mesmo excluir esse pet?");
     if (resultado) {
-      const pegaURL = new URL(window.location)
-      const id = pegaURL.searchParams.get('id')
-      await petService.removerPet(id)
-      window.location.href = '../pets.html'
+      const pegaURL = new URL(window.location);
+      const id = pegaURL.searchParams.get("id");
+      await petService.removerPet(id);
+      window.location.href = "../pets.html";
     } else {
-      return
+      return;
     }
   }
 })
-const verificarPerfil = () => {
-  const token = sessionStorage.getItem("token")
 
-  if (token == null) {
-    window.location.href = '../../../index.html';
-  }
-
-  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
-
-  if (tipo_usuario == "Associado") {
-    window.location.href = "../../associado/home.html";
-  }
-}
-
-verificarPerfil()
-detalharPet()
+detalharPet();

@@ -2,27 +2,27 @@ const retornarUsuarioAtual = (token) => {
   return fetch(`http://localhost:8000/usuario/atual?token=${token}`)
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.json()
+        return resposta.json();
       }
-      throw new Error('Não foi possível retornar o usuário atual')
+      throw new Error("Não foi possível retornar o usuário atual");
     })
     .then(json => {
-      return json
+      return json;
     })
-}
+};
 
 const listarNomesDeUsuario = (input) => {
-  const nomeUsuario = input.value
-  const usuario_atual = sessionStorage.getItem('usuario_atual')
+  const nomeUsuario = input.value;
+  const usuario_atual = sessionStorage.getItem("usuario_atual");
 
-  const url = `http://localhost:8000/usuarios/existe/${nomeUsuario}`
+  const url = `http://localhost:8000/usuarios/existe/${nomeUsuario}`;
   const options = {
-    method: 'GET',
-    mode: 'cors',
+    method: "GET",
+    mode: "cors",
     headers: {
-      'content-type': 'application/json;charset=utf-8'
+      "content-type": "application/json;charset=utf-8"
     }
-  }
+  };
 
   if (!input.validity.patternMismatch && !input.validity.valueMissing) {
 
@@ -31,20 +31,20 @@ const listarNomesDeUsuario = (input) => {
       )
       .then(data => {
         if (data == nomeUsuario && !(data == usuario_atual)) {
-          input.setCustomValidity('O nome de usuário já está em uso.')
+          input.setCustomValidity("O nome de usuário já está em uso.");
           return
         }
-        input.setCustomValidity('')
-        return
+        input.setCustomValidity("");
+        return;
       })
   }
-}
+};
 
 const atualizarUsuario = (id, dados) => {
   return fetch(`http://localhost:8000/usuarios/${id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       login: dados.login,
@@ -53,14 +53,14 @@ const atualizarUsuario = (id, dados) => {
   })
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.body
+        return resposta.body;
       }
-      throw new Error(resposta.body)
+      throw new Error(resposta.body);
     })
-}
+};
 
 export const usuarioService = {
   retornarUsuarioAtual,
   listarNomesDeUsuario,
   atualizarUsuario
-}
+};

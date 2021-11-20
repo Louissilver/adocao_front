@@ -1,7 +1,23 @@
-import { solicitacao_adocaoService } from '../../../service/solicitacao_adocao_service.js';
+import { solicitacao_adocaoService } from "../../../service/solicitacao_adocao_service.js";
+
+const verificarPerfil = () => {
+  const token = sessionStorage.getItem("token");
+
+  if (token == null) {
+    window.location.href = "../../../index.html";
+  }
+
+  const tipo_usuario = sessionStorage.getItem("tipo_usuario");
+
+  if (tipo_usuario == "ONG") {
+    window.location.href = "../../ong/home.html";
+  }
+}
+
+verificarPerfil();
 
 const criarElemento = (elemento) => {
-  const section = document.createElement('section')
+  const section = document.createElement("section");
   const conteudo = `
   <div class="container-fluid">
   <p class="text-muted my-3">Pet</p>
@@ -25,7 +41,7 @@ const criarElemento = (elemento) => {
   <ul class="list-group list-group-flush">
   <li class="list-group-item">Aprovado: ${elemento.aprovado ? "Sim" : "Não"}</li>
   <li class="list-group-item">Finalizado: ${elemento.finalizado ? "Sim" : "Não"}</li>
-  <li class="list-group-item">Data da solicitação: ${new Date(elemento.dataSolicitacao).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</li>
+  <li class="list-group-item">Data da solicitação: ${new Date(elemento.dataSolicitacao).toLocaleDateString("pt-BR", { timeZone: "UTC" })}</li>
   </ul>
   <div class="modal-footer">
   <button type="button" class="btn btn-secondary" onclick="window.history.back()">Voltar</button>
@@ -33,51 +49,37 @@ const criarElemento = (elemento) => {
   </div>
   </div>
   </div>
-                `
-  section.innerHTML = conteudo
-  return section
+                `;
+  section.innerHTML = conteudo;
+  return section;
 }
 
-const section = document.querySelector('[data-main-solicitacao]');
+const section = document.querySelector("[data-main-solicitacao]");
 
-section.addEventListener('click', async (evento) => {
-  let ehBotaoDeExcluir = evento.target.id === 'excluir'
+section.addEventListener("click", async (evento) => {
+  let ehBotaoDeExcluir = evento.target.id === "excluir";
   if (ehBotaoDeExcluir) {
 
-    let resultado = window.confirm("Deseja mesmo excluir essa solicitação?")
+    let resultado = window.confirm("Deseja mesmo excluir essa solicitação?");
     if (resultado) {
-      const pegaURL = new URL(window.location)
-      const id = pegaURL.searchParams.get('id')
-      await solicitacao_adocaoService.removerSolicitacao(id)
-      window.location.href = '../solicitacoes.html'
+      const pegaURL = new URL(window.location);
+      const id = pegaURL.searchParams.get("id");
+      await solicitacao_adocaoService.removerSolicitacao(id);
+      window.location.href = "../solicitacoes.html";
     } else {
-      return
+      return;
     }
   }
 })
 
 const detalhaSolicitacao = async () => {
 
-  const pegaURL = new URL(window.location)
+  const pegaURL = new URL(window.location);
 
-  const id = pegaURL.searchParams.get('id')
+  const id = pegaURL.searchParams.get("id");
 
-  const solicitacao = await solicitacao_adocaoService.detalharSolicitacao(id)
-  section.appendChild(criarElemento(solicitacao))
-}
-const verificarPerfil = () => {
-  const token = sessionStorage.getItem("token")
-
-  if (token == null) {
-    window.location.href = '../../../index.html';
-  }
-
-  const tipo_usuario = sessionStorage.getItem("tipo_usuario")
-
-  if (tipo_usuario == "ONG") {
-    window.location.href = "../../ong/home.html";
-  }
+  const solicitacao = await solicitacao_adocaoService.detalharSolicitacao(id);
+  section.appendChild(criarElemento(solicitacao));
 }
 
-verificarPerfil()
-detalhaSolicitacao()
+detalhaSolicitacao();

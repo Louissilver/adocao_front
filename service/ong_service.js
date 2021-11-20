@@ -2,33 +2,33 @@ const listarOngs = () => {
   return fetch(`http://localhost:8000/ongs`)
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.json()
+        return resposta.json();
       }
-      throw new Error('Não foi possível listar as ONGs')
+      throw new Error("Não foi possível listar as ONGs");
     })
     .then(json => {
-      return json
+      return json;
     })
-}
+};
 
 const detalharOngs = (id) => {
   return fetch(`http://localhost:8000/ongs/${id}`)
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.json()
+        return resposta.json();
       }
-      throw new Error('Não foi possível listar a ONGs')
+      throw new Error("Não foi possível listar a ONGs");
     })
     .then(json => {
-      return json
+      return json;
     })
-}
+};
 
 const cadastrarOng = (dados) => {
   return fetch(`http://localhost:8000/ongs`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       ong: {
@@ -53,17 +53,17 @@ const cadastrarOng = (dados) => {
   })
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.body
+        return resposta.body;
       }
-      throw new Error(resposta.body)
+      throw new Error(resposta.body);
     })
-}
+};
 
 const atualizarOng = (id, dados) => {
   return fetch(`http://localhost:8000/ongs/${id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       nome: dados.nome,
@@ -82,15 +82,15 @@ const atualizarOng = (id, dados) => {
   })
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.body
+        return resposta.body;
       }
-      throw new Error(resposta.body)
+      throw new Error(resposta.body);
     })
-}
+};
 
 export const ongService = {
   listarOngs,
   detalharOngs,
   cadastrarOng,
   atualizarOng
-}
+};

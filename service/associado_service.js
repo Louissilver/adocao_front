@@ -2,20 +2,20 @@ const detalharAssociado = (id) => {
   return fetch(`http://localhost:8000/associados/${id}`)
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.json()
+        return resposta.json();
       }
-      throw new Error('Não foi possível listar o associado')
+      throw new Error("Não foi possível listar o associado");
     })
     .then(json => {
-      return json
+      return json;
     })
-}
+};
 
 const cadastrarAssociado = (dados) => {
   return fetch(`http://localhost:8000/associados`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       associado: {
@@ -41,17 +41,17 @@ const cadastrarAssociado = (dados) => {
   })
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.body
+        return resposta.body;
       }
-      throw new Error(resposta.body)
+      throw new Error(resposta.body);
     })
-}
+};
 
 const atualizarAssociado = (id, dados) => {
   return fetch(`http://localhost:8000/associados/${id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       nome: dados.nome,
@@ -72,15 +72,15 @@ const atualizarAssociado = (id, dados) => {
   })
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.body
+        return resposta.body;
       }
-      throw new Error(resposta.body)
+      throw new Error(resposta.body);
     })
-}
+};
 
 
 export const associadoService = {
   detalharAssociado,
   cadastrarAssociado,
   atualizarAssociado
-}
+};

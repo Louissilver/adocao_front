@@ -2,33 +2,33 @@ const listarSolicitacoes = () => {
   return fetch(`http://localhost:8000/adocao/solicitacoes`)
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.json()
+        return resposta.json();
       }
-      throw new Error('Não foi possível listar as solicitações')
+      throw new Error("Não foi possível listar as solicitações");
     })
     .then(json => {
-      return json
+      return json;
     })
-}
+};
 
 const detalharSolicitacao = (id) => {
   return fetch(`http://localhost:8000/adocao/solicitacoes/${id}`)
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.json()
+        return resposta.json();
       }
-      throw new Error('Não foi possível listar a solicitação')
+      throw new Error("Não foi possível listar a solicitação");
     })
     .then(json => {
-      return json
+      return json;
     })
-}
+};
 
 const cadastrarSolicitacao = (dados) => {
   return fetch(`http://localhost:8000/adocao/solicitacoes`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       id_associado: dados.id_associado,
@@ -48,52 +48,52 @@ const cadastrarSolicitacao = (dados) => {
   })
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.body
+        return resposta.body;
       }
-      throw new Error(resposta.body)
+      throw new Error(resposta.body);
     })
-}
+};
 
 const aprovarSolicitacao = (id) => {
   return fetch(`http://localhost:8000/adocao/solicitacoes/aprovar/${id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     }
   })
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.body
+        return resposta.body;
       }
-      throw new Error(resposta.body)
+      throw new Error(resposta.body);
     })
-}
+};
 
 const finalizarSolicitacao = (id) => {
   return fetch(`http://localhost:8000/adocao/solicitacoes/finalizar/${id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     }
   })
     .then(resposta => {
       if (resposta.ok) {
-        return resposta.body
+        return resposta.body;
       }
-      throw new Error(resposta.body)
+      throw new Error(resposta.body);
     })
-}
+};
 
 const removerSolicitacao = (id) => {
   return fetch(`http://localhost:8000/adocao/solicitacoes/${id}`, {
-    method: 'DELETE'
+    method: "DELETE"
   })
     .then(resposta => {
       if (!resposta.ok) {
-        throw new Error('Não foi possível deletar uma solicitação')
+        throw new Error("Não foi possível deletar uma solicitação");
       }
     })
-}
+};
 
 
 export const solicitacao_adocaoService = {
@@ -103,4 +103,4 @@ export const solicitacao_adocaoService = {
   aprovarSolicitacao,
   finalizarSolicitacao,
   removerSolicitacao
-}
+};
